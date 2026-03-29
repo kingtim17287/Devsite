@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>KingTim17287 | Roblox Game Developer</title>
-    <meta name="description" id="meta-desc" content="Creator of fun Roblox experiences! Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more.">
+    <meta name="description" id="meta-desc" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!">
     <link id="favicon" rel="icon" type="image/png" href="">
     
     <meta property="og:title" id="og-title" content="KingTim17287 | Roblox Game Developer">
-    <meta property="og:description" id="og-desc" content="Creator of fun Roblox experiences! Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more.">
+    <meta property="og:description" id="og-desc" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!">
     <meta property="og:image" id="og-img" content="">
     
     <meta name="theme-color" content="#020617">
@@ -20,82 +20,52 @@
         :root { --accent: #3b82f6; --bg: #020617; --text: #ffffff; }
         body { background-color: var(--bg); color: var(--text); scroll-behavior: smooth; overflow-x: hidden; }
         
-        #main-title { font-size: clamp(2.5rem, 10vw, 8rem); hyphens: auto; line-height: 0.9; }
-        
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
         
-        section { display: none; scroll-margin-top: 100px; width: 100%; }
-        section:target { display: block; }
-        #home { display: block; }
-        body:has(section:target) #home { display: none; }
-
+        section { scroll-margin-top: 100px; width: 100%; }
+        
         .img-container { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: rgba(0,0,0,0.2); }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .group:hover .img-container img { transform: scale(1.05); }
         
         .desc-truncate { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         
-        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
+        .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
         
-        .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }
-        @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-        #mobile-menu { transition: all 0.3s ease-in-out; }
-        
-        /* Stats styling - exactly like xyrx.dev */
-        .stat-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .game-stat { font-size: 0.9rem; }
     </style>
 </head>
 <body class="antialiased tracking-tight">
+
 <script>
     /* =========================================
        CONFIGURATION - FULLY CUSTOMIZED FOR YOU
        ========================================= */
     const portfolioConfig = {
-        userId: "3808496324",                     // ← YOUR Roblox ID
-        name: "KingTim17287",                      // ← YOUR Display Name
-        title: "Roblox Game Developer",            // ← Hero Title
-        bio: "Creator of fun Roblox experiences! Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!", // Bio
+        userId: "3808496324",
+        name: "KingTim17287",
+        accentHex: "#3b82f6",
+        backgroundColor: "#0b1120",
+        textColor: "#f8fafc",
 
-        // --- Colors ---
-        accentHex: "#3b82f6",              // Theme Color
-        backgroundColor: "#0b1120",       
-        textColor: "#f8fafc",            
+        // ONLY these 8 games (no auto-pull of everything else)
+        manualGames: [
+            { placeId: 106988495261000, displayName: "Jetpack over LAVA for Brainrots" },
+            { placeId: 77942507005261,  displayName: "Dead Meals" },
+            { placeId: 95744979554149,  displayName: "99 Nights Zombie Tower Defense" },
+            { placeId: 104877476991790, displayName: "99 Nights with a Zombie Girl" },
+            { placeId: 14044594226,     displayName: "Cheese Escape BUT POO" },
+            { placeId: 82126039807655,  displayName: "Camping in Limbo" },
+            { placeId: 101246660655753, displayName: "SLIME TROLL OBBY" },
+            { placeId: 108311894104237, displayName: "Egg Car Obby" }
+        ],
 
-        // --- STATUS ---
-        forHire: "No",               // "Yes" or "No" 
-        avatarAnimation: "Yes",      // floating avatar
-        
-        // --- SEO and Assets ---
-        seoTitle: "KingTim17287 | Roblox Game Developer",
-        seoDescription: "Creator of fun Roblox experiences! Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!",
-        seoFavicon: "",           // Leave empty to use Roblox Avatar
-        seoImage: "",            // Leave empty to use Roblox Avatar
-        
-        // --- Tools (kept your original, you can delete if you want) ---
-        tools: {
-            "HTML": { years: "7", desc: "Building structured and responsive layouts since 2019." },
-            "CSS / Tailwind": { years: "2", desc: "Creating modern UI systems using utility-first styling." },
-            "PHP": { years: "1", desc: "Developing backend logic, API integrations, and dynamic systems." },
-            "MYSQL": { years: "1", desc: "Working with relational databases and structured data handling." }
-        },
-
-        // --- Links ---
-        links: {
-            "Roblox": "https://www.roblox.com/users/3808496324/profile",
-            "GitHub": "https://github.com/kingtim17287"
-        },
-
-        // --- Extra Projects (your 3 groups + any others) ---
+        // Your 3 groups (kept as extra cards)
         extraProjects: [
             {
                 name: "Boden Interactive",
                 desc: "Official Group - Join for updates & events!",
-                image: "https://www.roblox.com/asset/?id=0", // placeholder - you can replace with a real group banner later
+                image: "https://www.roblox.com/asset/?id=0",
                 link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about"
             },
             {
@@ -110,19 +80,21 @@
                 image: "https://www.roblox.com/asset/?id=0",
                 link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about"
             }
-        ]
+        ],
+
+        // Links
+        links: {
+            "Roblox": "https://www.roblox.com/users/3808496324/profile",
+            "GitHub": "https://github.com/kingtim17287"
+        }
     };
-        /* =========================================
-       THAT'S IT STOP HERE
-       ========================================= */
 </script>
 
-<!-- NAV (unchanged) -->
+<!-- NAV - simplified (no Home link) -->
 <nav class="fixed top-0 w-full z-50 py-3 md:py-5 px-4 md:px-6 glass">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
         <div class="flex items-center gap-2 md:gap-3">
-            <span id="nav-name" class="font-black text-lg md:text-2xl italic tracking-tighter uppercase leading-none" style="color: var(--accent);">USER</span>
-            <span id="hire-status" class="text-[7px] md:text-[10px] border px-1.5 py-0.5 md:px-2 md:py-1 rounded font-bold uppercase tracking-widest leading-none"></span>
+            <span id="nav-name" class="font-black text-lg md:text-2xl italic tracking-tighter uppercase leading-none" style="color: var(--accent);">KingTim17287</span>
         </div>
         
         <button id="menu-btn" onclick="toggleMenu()" class="md:hidden p-2 focus:outline-none" style="color: var(--accent);">
@@ -132,53 +104,34 @@
         </button>
 
         <div class="hidden md:flex space-x-8 text-xs font-black uppercase tracking-[0.2em]">
-            <a href="#" class="hover:opacity-70 transition">Home</a>
             <a href="#work" class="hover:opacity-70 transition">Work</a>
-            <a href="#tools" class="hover:opacity-70 transition">Stack</a>
             <a href="#contact" class="hover:opacity-70 transition">Contact</a>
         </div>
     </div>
 
     <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass border-t border-white/5 py-8 px-6 flex flex-col space-y-6 text-center font-black uppercase tracking-[0.2em] italic shadow-2xl">
-        <a href="#" onclick="toggleMenu()" class="text-base py-2">Home</a>
         <a href="#work" onclick="toggleMenu()" class="text-base py-2 border-t border-white/5 pt-6">Work</a>
-        <a href="#tools" onclick="toggleMenu()" class="text-base py-2 border-t border-white/5 pt-6">Stack</a>
         <a href="#contact" onclick="toggleMenu()" class="text-base py-2 border-t border-white/5 pt-6 border-b pb-6">Contact</a>
     </div>
 </nav>
 
 <div class="pt-32 md:pt-40 pb-20 px-5 md:px-6 max-w-6xl mx-auto min-h-screen">
-    
-    <section id="home" class="text-center">
-        <div id="avatar-container" class="relative inline-block mb-6 md:mb-10">
-            <img id="avatar-img" src="" class="w-40 h-40 md:w-56 md:h-56 rounded-full border-4 shadow-2xl bg-slate-800" style="border-color: var(--accent);">
-        </div>
-        <h1 id="main-title" class="font-black mb-6 italic uppercase tracking-tighter break-words px-2"></h1>
-        <p id="main-bio" class="text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed mb-10 md:12 italic opacity-70 px-4"></p>
-        <div class="flex flex-col sm:flex-row justify-center gap-4 px-6">
-            <a href="#work" id="btn-portfolio" class="w-full sm:w-auto px-10 py-4 rounded-xl font-black uppercase italic transition-all shadow-xl text-white text-center">Portfolio</a>
-            <a href="#contact" class="w-full sm:w-auto glass px-10 py-4 rounded-xl font-black uppercase italic hover:bg-white/10 transition-all text-center">Get in Touch</a>
-        </div>
-    </section>
 
-    <!-- NEW STATS SECTION - EXACTLY LIKE XYRX.DEV -->
-    <section id="stats" class="mb-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- TOP TOTAL STATS (exactly what you asked for) -->
+    <section class="mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="stat-card rounded-3xl p-8 text-center">
-                <div id="ccu-count" class="text-6xl font-black italic text-emerald-400">0</div>
+                <div id="total-playing" class="text-6xl font-black italic text-emerald-400">0</div>
                 <p class="uppercase text-sm tracking-widest text-emerald-400/80 mt-2">Players Playing My Games</p>
             </div>
             <div class="stat-card rounded-3xl p-8 text-center">
-                <div id="visits-count" class="text-6xl font-black italic text-blue-400">0</div>
+                <div id="total-visits" class="text-6xl font-black italic text-blue-400">0</div>
                 <p class="uppercase text-sm tracking-widest text-blue-400/80 mt-2">Total Visits</p>
-            </div>
-            <div class="stat-card rounded-3xl p-8 text-center">
-                <div id="sessions-count" class="text-6xl font-black italic text-purple-400">0</div>
-                <p class="uppercase text-sm tracking-widest text-purple-400/80 mt-2">Total Play Sessions</p>
             </div>
         </div>
     </section>
 
+    <!-- WORK SECTION - only your 8 games + groups -->
     <section id="work">
         <div class="flex items-center gap-3 md:gap-4 mb-8 md:mb-12">
             <div class="h-8 md:h-10 w-2" style="background-color: var(--accent);"></div>
@@ -186,23 +139,18 @@
         </div>
         
         <div id="work-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <!-- Games + groups are injected here by JS -->
+            <!-- Filled by JavaScript -->
         </div>
     </section>
 
-    <section id="tools">
-        <h2 class="text-3xl md:text-5xl font-black mb-8 md:mb-12 italic uppercase text-center tracking-tighter">
-            Tech <span style="color: var(--accent);">Stack</span>
-        </h2>
-        <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center px-4 md:px-0"></div>
-    </section>
-
-    <section id="contact">
+    <!-- CONTACT -->
+    <section id="contact" class="mt-16">
         <h2 class="text-3xl md:text-5xl font-black mb-8 md:mb-12 italic uppercase text-center tracking-tighter">
             Let's <span style="color: var(--accent);">Connect</span>
         </h2>
         <div id="links-grid" class="max-w-xl mx-auto grid gap-4 px-4 md:px-0"></div>
     </section>
+
 </div>
 
 <footer class="glass mt-20 border-t border-white/5 py-10 text-center">
@@ -215,19 +163,13 @@
             <div class="flex flex-wrap justify-center gap-4 md:gap-6">
                 <a href="#" class="transition hover:opacity-70">Back to top</a>
                 <span class="text-gray-800 hidden sm:inline">|</span>
-                <span class="text-gray-500">Template by <a id="credit-link" href="https://www.roblox.com/users/319189457/profile" target="_blank" class="text-white hover:underline">UN6107617</a></span>
-            </div>
-            <div class="flex gap-3 text-[9px] font-bold tracking-tighter text-gray-600 uppercase">
-                <span>Powered by HTML & <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:underline">TailwindCSS</a></span>
-                <span>•</span>
-                <a href="https://github.com/UN6107617/roblox-portfolio-template-html" target="_blank" class="hover:text-500">Get this Template</a>
+                <span class="text-gray-500">Template by <a href="https://www.roblox.com/users/319189457/profile" target="_blank" class="text-white hover:underline">UN6107617</a></span>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-    // Mobile menu (unchanged)
     function toggleMenu() {
         const menu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
@@ -235,43 +177,96 @@
         icon.style.transform = menu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(90deg)';
     }
 
+    async function fetchMyGames() {
+        const cfg = portfolioConfig;
+        const placeIds = cfg.manualGames.map(g => g.placeId);
+        if (placeIds.length === 0) return;
+
+        try {
+            const placeIdsStr = placeIds.join(',');
+
+            // 1. Get place details (name, description, universeId)
+            const placeRes = await fetch(`https://games.roproxy.com/v1/games/multiget-place-details?placeIds=${placeIdsStr}`);
+            const placeData = await placeRes.json();
+
+            // 2. Get thumbnails
+            const iconRes = await fetch(`https://thumbnails.roproxy.com/v1/places/icons?placeIds=${placeIdsStr}&size=512x512&format=Png`);
+            const iconData = await iconRes.json();
+
+            // 3. Get stats (CCU + visits) using universeIds
+            const universeIds = placeData.data.map(p => p.universeId).join(',');
+            const statsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${universeIds}`);
+            const statsData = await statsRes.json();
+
+            // Build full game objects
+            let totalPlaying = 0;
+            let totalVisits = 0;
+
+            const gamesHtml = placeData.data.map(p => {
+                const stats = statsData.data.find(s => s.universeId === p.universeId) || { playing: 0, visits: 0 };
+                const icon = iconData.data.find(i => i.targetId === p.placeId) || {};
+                
+                totalPlaying += stats.playing || 0;
+                totalVisits += stats.visits || 0;
+
+                return `
+                <div class="glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col group border border-white/5">
+                    <div class="img-container"><img src="${icon.imageUrl || 'https://www.roblox.com/asset/?id=0'}" alt="${p.name}"></div>
+                    <div class="p-6 md:p-8 text-left">
+                        <h3 class="text-2xl md:text-3xl font-black mb-2 italic uppercase tracking-tighter text-white">${p.name}</h3>
+                        <p class="opacity-60 text-sm italic mb-6 desc-truncate">${p.description || 'No description provided.'}</p>
+                        
+                        <div class="game-stat flex justify-between text-xs mb-4">
+                            <div><span class="text-emerald-400">CCU</span> <span class="font-black">${(stats.playing || 0).toLocaleString()}</span></div>
+                            <div><span class="text-blue-400">Visits</span> <span class="font-black">${(stats.visits || 0).toLocaleString()}</span></div>
+                        </div>
+                        
+                        <a href="https://www.roblox.com/games/${p.placeId}" target="_blank" 
+                           class="font-black text-xs uppercase" style="color:var(--accent)">Launch Experience →</a>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Groups (extraProjects)
+            const groupsHtml = cfg.extraProjects.map(p => `
+                <div class="glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col group border border-white/5">
+                    <div class="img-container"><img src="${p.image}" onerror="this.src='https://www.roblox.com/asset/?id=0'"></div>
+                    <div class="p-6 md:p-8 text-left">
+                        <h3 class="text-2xl md:text-3xl font-black mb-2 italic uppercase tracking-tighter text-white">${p.name}</h3>
+                        <p class="opacity-60 text-sm italic mb-6 desc-truncate">${p.desc}</p>
+                        <a href="${p.link}" target="_blank" class="font-black text-xs uppercase" style="color:var(--accent)">Join Group →</a>
+                    </div>
+                </div>`).join('');
+
+            // Put everything in the grid
+            document.getElementById('work-grid').innerHTML = groupsHtml + gamesHtml;
+
+            // Update top total stats
+            document.getElementById('total-playing').innerText = totalPlaying.toLocaleString();
+            document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
+
+        } catch (e) {
+            console.error("Failed to load games:", e);
+            document.getElementById('work-grid').innerHTML = `<p class="text-center text-red-400">Could not load games right now. Please try refreshing.</p>`;
+        }
+    }
+
     function initPortfolio() {
         const cfg = portfolioConfig;
         
-        // Apply colors & UI
+        // Colors
         document.documentElement.style.setProperty('--accent', cfg.accentHex);
         document.documentElement.style.setProperty('--bg', cfg.backgroundColor);
         document.documentElement.style.setProperty('--text', cfg.textColor);
         
-        document.title = cfg.seoTitle;
-        document.getElementById('meta-desc').content = cfg.seoDescription;
-        document.getElementById('og-title').content = cfg.seoTitle;
-        document.getElementById('og-desc').content = cfg.seoDescription;
-
+        // Basic info
+        document.title = cfg.name + " | Roblox Game Developer";
+        document.getElementById('meta-desc').content = "My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!";
         document.getElementById('nav-name').innerText = cfg.name;
         document.getElementById('footer-name').innerText = cfg.name;
-        document.getElementById('main-title').innerText = cfg.title;
-        document.getElementById('main-bio').innerText = cfg.bio;
-        document.getElementById('copyright').innerText = `Roblox Developer Portfolio © ${new Date().getFullYear()}`;
+        document.getElementById('copyright').innerText = `© ${new Date().getFullYear()} KingTim17287`;
 
-        const hire = document.getElementById('hire-status');
-        hire.innerText = cfg.forHire === 'Yes' ? "For Hire: Available" : "For Hire: Busy";
-        hire.className = `text-[8px] md:text-[10px] border px-2 py-1 rounded font-bold uppercase tracking-widest leading-none ${cfg.forHire === 'Yes' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30'}`;
-
-        const avatar = document.getElementById('avatar-container');
-        cfg.avatarAnimation === 'Yes' ? avatar.classList.add('animate-bounce-slow') : avatar.classList.remove('animate-bounce-slow');
-
-        // Render stack & links (unchanged)
-        const tGrid = document.getElementById('tools-grid');
-        tGrid.innerHTML = '';
-        Object.entries(cfg.tools).forEach(([name, data]) => {
-            const div = document.createElement('div');
-            div.className = "glass p-6 rounded-2xl border border-white/5 uppercase font-black italic text-sm transition-all hover:scale-105 cursor-pointer";
-            div.innerText = name;
-            div.onclick = () => showToolDetail(name, data.years, data.desc);
-            tGrid.appendChild(div);
-        });
-
+        // Render links
         const lGrid = document.getElementById('links-grid');
         lGrid.innerHTML = '';
         Object.entries(cfg.links).forEach(([label, url]) => {
@@ -282,131 +277,11 @@
             lGrid.appendChild(a);
         });
 
-        fetchRoblox(cfg.userId);
-    }
-
-    // UPDATED FETCH - uses the original API + extra roproxy fetch for LIVE CCU / VISITS / SESSIONS
-    async function fetchRoblox(uid) {
-        if (!uid) return;
-
-        try {
-            // 1. Get avatar & basic data from the original proxy (fast & reliable)
-            const res = await fetch(`https://api.un6107617.dev/portfolio/${uid}`);
-            const data = await res.json();
-
-            if (data.success) {
-                // Avatar
-                document.getElementById('avatar-img').src = data.user.avatar;
-
-                // SEO images
-                const finalFavicon = portfolioConfig.seoFavicon || data.user.avatar;
-                const finalOgImg = portfolioConfig.seoImage || data.user.avatar;
-                document.getElementById('favicon').href = finalFavicon;
-                document.getElementById('og-img').content = finalOgImg;
-
-                // 2. Render games + extra projects (your groups)
-                const grid = document.getElementById('work-grid');
-                let html = "";
-
-                // Extra projects (your 3 groups)
-                if (portfolioConfig.extraProjects && portfolioConfig.extraProjects.length > 0) {
-                    html += portfolioConfig.extraProjects.map(p => `
-                        <div class="glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col group border border-white/5">
-                            <div class="img-container"><img src="${p.image}" onerror="this.src='https://www.roblox.com/asset/?id=0'"></div>
-                            <div class="p-6 md:p-8 text-left">
-                                <h3 class="text-2xl md:text-3xl font-black mb-2 italic uppercase tracking-tighter text-white">${p.name}</h3>
-                                <p class="opacity-60 text-sm italic mb-6 desc-truncate">${p.desc}</p>
-                                <a href="${p.link}" target="_blank" class="font-black text-xs uppercase" style="color:var(--accent)">Join Group →</a>
-                            </div>
-                        </div>`).join('');
-                }
-
-                // Roblox games from the API
-                html += data.games.map(g => `
-                    <div class="glass rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex flex-col group border border-white/5">
-                        <div class="img-container"><img src="${g.thumbnail}"></div>
-                        <div class="p-6 md:p-8 text-left">
-                            <h3 class="text-2xl md:text-3xl font-black mb-2 italic uppercase tracking-tighter text-white">${g.name}</h3>
-                            <p class="opacity-60 text-sm italic mb-6 desc-truncate">${g.description || 'No description provided.'}</p>
-                            <a href="https://www.roblox.com/games/${g.placeId}" target="_blank" class="font-black text-xs uppercase" style="color:var(--accent)">Launch Experience →</a>
-                        </div>
-                    </div>`).join('');
-
-                grid.innerHTML = html;
-            }
-
-            // 3. Fetch LIVE STATS (CCU + visits + sessions) using roproxy (no CORS issues)
-            await fetchLiveStats(uid);
-
-        } catch (e) {
-            console.error("API Fetch failed:", e);
-        }
-    }
-
-    // LIVE STATS FETCH (exactly what xyrx.dev used)
-    async function fetchLiveStats(uid) {
-        try {
-            // Get all universes for the user
-            const gamesRes = await fetch(`https://games.roproxy.com/v2/users/${uid}/games?limit=100&sortOrder=Desc`);
-            const gamesData = await gamesRes.json();
-
-            if (!gamesData.data || gamesData.data.length === 0) return;
-
-            const universeIds = gamesData.data.map(g => g.universeId).join(',');
-
-            // Get detailed stats for all universes at once
-            const statsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${universeIds}`);
-            const statsData = await statsRes.json();
-
-            let totalCCU = 0;
-            let totalVisits = 0;
-            let totalSessions = 0;
-
-            statsData.data.forEach(game => {
-                totalCCU += game.playing || 0;
-                totalVisits += game.visits || 0;
-                totalSessions += game.playing || 0; // Play sessions often uses the same "playing" value in simple portfolios
-            });
-
-            // Update the stats cards
-            document.getElementById('ccu-count').innerText = totalCCU.toLocaleString();
-            document.getElementById('visits-count').innerText = totalVisits.toLocaleString();
-            document.getElementById('sessions-count').innerText = totalSessions.toLocaleString();
-
-        } catch (e) {
-            console.error("Live stats fetch failed (this is optional):", e);
-            // fallback to 0s if roproxy ever goes down
-        }
-    }
-
-    // Tool modal (unchanged)
-    function showToolDetail(n, y, d) {
-        const modal = document.getElementById('toolModal');
-        if(!modal) return;
-        document.getElementById('modalTitle').innerText = n;
-        document.getElementById('modalYears').innerText = y;
-        document.getElementById('modalDesc').innerText = d;
-        modal.classList.remove('hidden');
-        setTimeout(() => document.getElementById('modalContent').classList.add('scale-100'), 10);
-    }
-
-    function closeToolModal() {
-        document.getElementById('modalContent').classList.remove('scale-100');
-        setTimeout(() => document.getElementById('toolModal').classList.add('hidden'), 200);
+        // Load only your 8 games + groups
+        fetchMyGames();
     }
 
     document.addEventListener('DOMContentLoaded', initPortfolio);
 </script>
-
-<!-- Tool modal (unchanged) -->
-<div id="toolModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]">
-    <div id="modalContent" class="glass max-w-lg w-full mx-4 rounded-3xl p-8 scale-95 transition-transform">
-        <h2 id="modalTitle" class="text-4xl font-black italic uppercase"></h2>
-        <p id="modalYears" class="text-emerald-400 text-xl font-bold mt-2"></p>
-        <p id="modalDesc" class="mt-6 text-lg"></p>
-        <button onclick="closeToolModal()" class="mt-8 w-full py-4 bg-white/10 hover:bg-white/20 rounded-2xl font-black uppercase text-sm tracking-widest">Close</button>
-    </div>
-</div>
-
 </body>
 </html>
