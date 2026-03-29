@@ -53,6 +53,22 @@
         .game-card:hover .img-container img { transform: scale(1.08); }
        
         .desc-truncate { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Badge for contributed games */
+        .contrib-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -65,9 +81,9 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <span class="heading-font text-xl tracking-tighter italic" style="color: var(--accent);">KINGTIM17287</span>
             <div class="flex gap-6 text-sm font-bold uppercase tracking-widest">
-                <a href="#games" class="hover:text-blue-400 transition">Games</a>
-                <a href="#contributed" class="hover:text-blue-400 transition">Contributed</a>
-                <a href="#groups" class="hover:text-blue-400 transition">Groups</a>
+                <a href="#games" class="hover:text-blue-400 transition">My Games</a>
+                <a href="#contributed" class="hover:text-blue-400 transition">Contributions</a>
+                <a href="#groups" class="hover:text-blue-400 transition">Studios</a>
             </div>
         </div>
     </nav>
@@ -89,31 +105,35 @@
                 <span class="uppercase text-xs tracking-[0.3em] text-blue-400 font-bold mb-2">Network Reach</span>
                 <div id="total-visits" class="stat-value text-7xl font-bold heading-font">0</div>
                 <p class="text-gray-500 mt-2 italic text-sm">Lifetime unique player visits across all titles</p>
+                <p class="text-[10px] text-gray-500/70 mt-1">Stats only include My Games (not contributions)</p>
             </div>
             <div class="glass p-8 rounded-3xl flex flex-col justify-center border-emerald-500/20">
                 <span class="uppercase text-xs tracking-[0.3em] text-emerald-400 font-bold mb-2">Live Now</span>
                 <div id="total-playing" class="stat-value text-7xl font-bold heading-font text-emerald-400">0</div>
                 <p class="text-gray-500 mt-2 italic text-sm">Concurrent players online</p>
+                <p class="text-[10px] text-gray-500/70 mt-1">Stats only include My Games (not contributions)</p>
             </div>
         </div>
 
-        <!-- Games Section -->
+        <!-- My Games Section (Owned / Led) -->
         <section id="games" class="mb-24 reveal" style="animation-delay: 0.4s;">
-            <div class="flex items-end justify-between mb-10">
-                <h2 class="heading-font text-3xl uppercase italic tracking-tighter">Project Catalog</h2>
+            <div class="flex items-end justify-between mb-6">
+                <h2 class="heading-font text-3xl uppercase italic tracking-tighter">My Games</h2>
                 <div class="h-[1px] flex-grow mx-8 bg-white/10 hidden md:block"></div>
             </div>
+            <p class="text-gray-400 text-sm max-w-md -mt-2 mb-8">Games I own and primarily develop</p>
             <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Games populated by JS -->
             </div>
         </section>
 
-        <!-- Contributed Games Section (NEW) -->
+        <!-- Contributions Section -->
         <section id="contributed" class="mb-24 reveal" style="animation-delay: 0.5s;">
-            <div class="flex items-end justify-between mb-10">
+            <div class="flex items-end justify-between mb-6">
                 <h2 class="heading-font text-3xl uppercase italic tracking-tighter">Games I Contribute To</h2>
                 <div class="h-[1px] flex-grow mx-8 bg-white/10 hidden md:block"></div>
             </div>
+            <p class="text-gray-400 text-sm max-w-md -mt-2 mb-8">Collaborative projects I've helped develop</p>
             <div id="contributed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Contributed games populated by JS -->
             </div>
@@ -138,7 +158,7 @@
             name: "KingTim17287",
             accentHex: "#3b82f6",
             manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
-            contributedGames: [107753480114427, 122606989565107],   // NEW: Games you contribute to
+            contributedGames: [107753480114427, 122606989565107],
             groups: [
                 { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
                 { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
@@ -161,8 +181,8 @@
                 }
             } catch (e) { console.warn("Avatar load failed", e); }
 
-            // Helper to fetch + render games (used for both main games and contributed games)
-            async function renderGameSection(placeIds, gridElementId) {
+            // Helper to fetch + render games (now accepts isContributed flag)
+            async function renderGameSection(placeIds, gridElementId, isContributed = false) {
                 const grid = document.getElementById(gridElementId);
                 try {
                     // Convert Place IDs → Universe IDs
@@ -206,9 +226,12 @@
                     }
 
                     // Render cards
-                    const gamesHTML = gamesList.map(g => `
-                        <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full">
+                    const gamesHTML = gamesList.map(g => {
+                        const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
+                        return `
+                        <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full relative">
                             <div class="img-container">
+                                ${badge}
                                 <img src="${thumbMap[g.id] || ''}" alt="${g.name}">
                             </div>
                             <div class="p-6 flex flex-col flex-1">
@@ -226,8 +249,8 @@
                                     PLAY NOW →
                                 </a>
                             </div>
-                        </div>
-                    `).join('');
+                        </div>`;
+                    }).join('');
 
                     grid.innerHTML = gamesHTML;
                 } catch (e) {
@@ -236,11 +259,10 @@
                 }
             }
 
-            // 2. Load Main Games (Project Catalog)
-            const gamesGrid = document.getElementById('games-grid');
-            await renderGameSection(cfg.manualGames, 'games-grid');
+            // 2. Load My Games (Owned / Led)
+            await renderGameSection(cfg.manualGames, 'games-grid', false);
 
-            // Update global stats from main games only (as before)
+            // Update global stats ONLY from My Games (contributions are excluded)
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
                     try {
@@ -259,10 +281,10 @@
                 }
             } catch (e) { console.warn("Stats update skipped", e); }
 
-            // 3. Load Contributed Games (NEW section)
-            await renderGameSection(cfg.contributedGames, 'contributed-grid');
+            // 3. Load Contributions
+            await renderGameSection(cfg.contributedGames, 'contributed-grid', true);
 
-            // 4. Load Groups with icons + member counts (sorted by most members)
+            // 4. Load Groups (sorted by most members)
             const groupsGrid = document.getElementById('groups-grid');
             try {
                 const groupIds = cfg.groups.map(g => g.id).join(',');
@@ -273,7 +295,6 @@
                     groupThumbData.data.forEach(t => { groupThumbMap[t.targetId] = t.imageUrl; });
                 }
 
-                // Fetch member counts
                 const enrichedGroups = await Promise.all(cfg.groups.map(async (g) => {
                     try {
                         const res = await fetch(`https://groups.roproxy.com/v1/groups/${g.id}`);
@@ -285,7 +306,6 @@
                     return { ...g, memberCount: 0 };
                 }));
 
-                // === NEW: Sort studios by most members first ===
                 enrichedGroups.sort((a, b) => b.memberCount - a.memberCount);
 
                 const groupsHTML = enrichedGroups.map(g => `
