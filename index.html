@@ -1,24 +1,4 @@
-<script>
-    async function load() {
-        const cfg = portfolioConfig;
-        document.documentElement.style.setProperty('--accent', cfg.accentHex);
-        document.getElementById('nav-name').innerText = cfg.name;
 
-        // 1. Still use the old API just for the avatar (it still works)
-        let avatarSrc = '';
-        try {
-            const res = await fetch(`https://api.un6107617.dev/portfolio/${cfg.userId}`);
-            const data = await res.json();
-            if (data.user?.avatar) avatarSrc = data.user.avatar;
-        } catch (e) {
-            console.warn("Avatar fetch failed (optional)", e);
-        }
-        if (avatarSrc) document.getElementById('avatar-img').src = avatarSrc;
-
-        // 2. NEW: Dynamically fetch your real games using the Place IDs you already have
-        const gamesPromises = cfg.manualGames.map(async (placeId) => {
-            try {
-                // Step A: Place ID → Universe ID (exactly the API from your screenshot)
                 const univRes = await fetch(`https://apis.roproxy.com/universes/v1/places/${placeId}/universe`);
                 const univData = await univRes.json();
                 const universeId = univData.universeId;
