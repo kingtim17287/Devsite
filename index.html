@@ -4,33 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingTim17287 | Roblox Game Developer</title>
-    <meta name="description" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!">
-    <link id="favicon" rel="icon" type="image/png" href="">
-    <meta property="og:title" content="KingTim17287 | Roblox Game Developer">
-    <meta property="og:description" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense, and more!">
-    <meta property="og:image" content="">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root { --accent: #3b82f6; --bg: #0b1120; --text: #f8fafc; }
-        body { background-color: var(--bg); color: var(--text); scroll-behavior: smooth; }
-        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .img-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(0,0,0,0.2); }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .group:hover .img-container img { transform: scale(1.05); }
+        body { background-color: var(--bg); color: var(--text); font-family: system-ui, sans-serif; }
+        .glass { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(12px); }
+        .img-container { aspect-ratio: 16/9; overflow: hidden; background: #111; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
         .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .avatar { animation: float 4s ease-in-out infinite; }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .error { background: #7f1d1d; color: white; padding: 1rem; border-radius: 1rem; text-align: center; margin: 1rem; }
     </style>
 </head>
-<body class="antialiased">
+<body class="min-h-screen">
+
+<nav class="fixed top-0 w-full z-50 py-5 glass px-6">
+    <div class="max-w-6xl mx-auto flex justify-between">
+        <span class="font-black text-3xl italic uppercase tracking-tighter" style="color:var(--accent)">KINGTIM17287</span>
+    </div>
+</nav>
+
+<div class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+
+    <!-- AVATAR -->
+    <div class="text-center mb-12">
+        <img id="avatar" src="https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=3808496324&size=420x420&format=Png&isCircular=true" 
+             class="w-64 h-64 mx-auto rounded-full border-8 shadow-2xl" style="border-color:var(--accent)">
+    </div>
+
+    <!-- STATS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div class="stat-card rounded-3xl p-8 text-center">
+            <div id="playing" class="text-6xl font-black italic text-emerald-400">0</div>
+            <p class="text-emerald-400/80 uppercase text-sm mt-2">PLAYERS PLAYING MY GAMES</p>
+        </div>
+        <div class="stat-card rounded-3xl p-8 text-center">
+            <div id="visits" class="text-6xl font-black italic text-blue-400">0</div>
+            <p class="text-blue-400/80 uppercase text-sm mt-2">TOTAL VISITS</p>
+        </div>
+    </div>
+
+    <!-- MY WORK -->
+    <div class="mb-8 flex items-center gap-3">
+        <div class="h-8 w-2" style="background:var(--accent)"></div>
+        <h2 class="text-4xl font-black italic uppercase tracking-tighter">MY WORK</h2>
+    </div>
+    <div id="grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+
+    <!-- ERROR BOX (will show if anything fails) -->
+    <div id="error-box" class="hidden error"></div>
+
+    <!-- CONNECT -->
+    <div class="mt-20">
+        <h2 class="text-4xl font-black italic uppercase text-center tracking-tighter mb-8">LET'S <span style="color:var(--accent)">CONNECT</span></h2>
+        <div class="max-w-xl mx-auto space-y-4">
+            <a href="https://www.roblox.com/users/3808496324/profile" target="_blank" class="glass p-6 rounded-3xl flex justify-between items-center hover:bg-white/10">
+                <span class="font-black uppercase text-xl">ROBLOX</span><span style="color:var(--accent)">→</span>
+            </a>
+            <a href="https://github.com/kingtim17287" target="_blank" class="glass p-6 rounded-3xl flex justify-between items-center hover:bg-white/10">
+                <span class="font-black uppercase text-xl">GITHUB</span><span style="color:var(--accent)">→</span>
+            </a>
+        </div>
+    </div>
+</div>
 
 <script>
     const cfg = {
         userId: "3808496324",
-        name: "KingTim17287",
-        accent: "#3b82f6",
-        manualGames: [
+        games: [
             { placeId: 106988495261000, name: "Jetpack over LAVA for Brainrots" },
             { placeId: 77942507005261,  name: "Dead Meals" },
             { placeId: 95744979554149,  name: "99 Nights Zombie Tower Defense" },
@@ -46,110 +86,62 @@
             { name: "StarWoven Productions", desc: "Official Group", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
         ]
     };
-</script>
 
-<!-- NAV -->
-<nav class="fixed top-0 w-full z-50 py-5 glass px-6">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <span class="font-black text-2xl italic uppercase tracking-tighter" style="color:var(--accent)">KINGTIM17287</span>
-        <div class="space-x-8 text-xs font-black uppercase tracking-widest hidden md:flex">
-            <a href="#work" class="hover:opacity-70">WORK</a>
-            <a href="#contact" class="hover:opacity-70">CONTACT</a>
-        </div>
-    </div>
-</nav>
+    async function loadData() {
+        const errorBox = document.getElementById('error-box');
+        const grid = document.getElementById('grid');
+        let html = '';
 
-<div class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-
-    <!-- AVATAR -->
-    <div class="text-center mb-12">
-        <img id="avatar" src="https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=3808496324&size=420x420&format=Png&isCircular=true" 
-             class="w-56 h-56 mx-auto rounded-full border-8 shadow-2xl avatar" style="border-color: var(--accent);">
-    </div>
-
-    <!-- TOTALS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <div class="stat-card rounded-3xl p-8 text-center">
-            <div id="playing" class="text-6xl font-black italic text-emerald-400">0</div>
-            <p class="text-emerald-400/80 uppercase text-sm tracking-widest mt-2">PLAYERS PLAYING MY GAMES</p>
-        </div>
-        <div class="stat-card rounded-3xl p-8 text-center">
-            <div id="visits" class="text-6xl font-black italic text-blue-400">0</div>
-            <p class="text-blue-400/80 uppercase text-sm tracking-widest mt-2">TOTAL VISITS</p>
-        </div>
-    </div>
-
-    <!-- WORK -->
-    <section id="work">
-        <div class="flex items-center gap-3 mb-8">
-            <div class="h-8 w-2 bg-[var(--accent)]"></div>
-            <h2 class="text-4xl font-black italic uppercase tracking-tighter">MY WORK</h2>
-        </div>
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="mt-20">
-        <h2 class="text-4xl font-black italic uppercase text-center tracking-tighter mb-8">LET'S <span style="color:var(--accent)">CONNECT</span></h2>
-        <div id="links" class="max-w-xl mx-auto space-y-4"></div>
-    </section>
-</div>
-
-<footer class="glass py-8 text-center text-xs font-bold">© 2026 KingTim17287</footer>
-
-<script>
-    // Render links
-    Object.entries(cfg.links || {Roblox:"https://www.roblox.com/users/3808496324/profile", GitHub:"https://github.com/kingtim17287"}).forEach(([label, url]) => {
-        const a = document.createElement('a');
-        a.href = url; a.target = "_blank";
-        a.className = "glass p-6 rounded-3xl flex justify-between items-center hover:bg-white/10 transition";
-        a.innerHTML = `<span class="font-black uppercase text-xl">${label}</span><span style="color:var(--accent)">→</span>`;
-        document.getElementById('links').appendChild(a);
-    });
-
-    // Fetch games + stats
-    async function load() {
-        const ids = cfg.manualGames.map(g => g.placeId).join(',');
         try {
-            const [detailsRes, thumbsRes, statsRes] = await Promise.all([
-                fetch(`https://games.roproxy.com/v1/games/multiget-place-details?placeIds=${ids}`),
-                fetch(`https://thumbnails.roproxy.com/v1/places/icons?placeIds=${ids}&size=512x512&format=Png`),
-                fetch(`https://games.roproxy.com/v1/games?universeIds=${(await (await fetch(`https://games.roproxy.com/v1/games/multiget-place-details?placeIds=${ids}`)).json()).data.map(p=>p.universeId).join(',')}`)
-            ]);
+            const ids = cfg.games.map(g => g.placeId).join(',');
 
+            // 1. Get game details
+            const detailsRes = await fetch(`https://games.roproxy.com/v1/games/multiget-place-details?placeIds=${ids}`);
+            if (!detailsRes.ok) throw new Error('Details fetch failed');
             const details = await detailsRes.json();
+
+            // 2. Get thumbnails
+            const thumbsRes = await fetch(`https://thumbnails.roproxy.com/v1/places/icons?placeIds=${ids}&size=512x512&format=Png`);
             const thumbs = await thumbsRes.json();
+
+            // 3. Get stats
+            const universeIds = details.data.map(p => p.universeId).join(',');
+            const statsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${universeIds}`);
             const stats = await statsRes.json();
 
-            let totalPlaying = 0, totalVisits = 0;
-            let html = '';
+            let totalPlaying = 0;
+            let totalVisits = 0;
 
-            // Groups first
+            // Groups
             cfg.groups.forEach(g => {
-                html += `<div class="glass rounded-3xl overflow-hidden"><div class="img-container"><img src="https://www.roblox.com/asset/?id=0"></div><div class="p-8"><h3 class="text-2xl font-black mb-2">${g.name}</h3><p class="opacity-70 mb-6">${g.desc}</p><a href="${g.link}" target="_blank" class="font-black text-xs uppercase" style="color:var(--accent)">JOIN GROUP →</a></div></div>`;
+                html += `<div class="glass rounded-3xl overflow-hidden"><div class="img-container"><img src="https://www.roblox.com/asset/?id=0"></div><div class="p-8"><h3 class="text-2xl font-black">${g.name}</h3><p class="opacity-70">${g.desc}</p><a href="${g.link}" target="_blank" class="mt-6 block font-black text-xs uppercase" style="color:var(--accent)">JOIN GROUP →</a></div></div>`;
             });
 
             // Games
             details.data.forEach(p => {
-                const stat = stats.data.find(s => s.universeId === p.universeId) || {playing:0, visits:0};
+                const stat = stats.data.find(s => s.universeId === p.universeId) || {playing:0,visits:0};
                 const thumb = thumbs.data.find(t => t.targetId === p.placeId) || {};
                 totalPlaying += stat.playing || 0;
                 totalVisits += stat.visits || 0;
 
-                html += `<div class="glass rounded-3xl overflow-hidden"><div class="img-container"><img src="${thumb.imageUrl}"></div><div class="p-8"><h3 class="text-2xl font-black mb-2">${p.name}</h3><p class="opacity-70 mb-6 desc-truncate">${p.description||''}</p><div class="flex justify-between text-xs"><div>CCU <span class="font-black text-emerald-400">${stat.playing}</span></div><div>Visits <span class="font-black text-blue-400">${stat.visits}</span></div></div><a href="https://www.roblox.com/games/${p.placeId}" target="_blank" class="font-black text-xs uppercase mt-6 block text-center" style="color:var(--accent)">PLAY →</a></div></div>`;
+                html += `<div class="glass rounded-3xl overflow-hidden"><div class="img-container"><img src="${thumb.imageUrl}"></div><div class="p-8"><h3 class="text-2xl font-black">${p.name}</h3><div class="flex justify-between text-xs mt-6"><div>CCU <span class="font-black text-emerald-400">${stat.playing}</span></div><div>Visits <span class="font-black text-blue-400">${stat.visits}</span></div></div><a href="https://www.roblox.com/games/${p.placeId}" target="_blank" class="mt-6 block font-black text-xs uppercase text-center" style="color:var(--accent)">PLAY →</a></div></div>`;
             });
 
-            document.getElementById('grid').innerHTML = html;
+            grid.innerHTML = html;
             document.getElementById('playing').textContent = totalPlaying;
             document.getElementById('visits').textContent = totalVisits;
-        } catch(e) {
-            document.getElementById('grid').innerHTML = `<p class="text-red-400 text-center py-12">Failed to load — make sure site is on GitHub Pages</p>`;
+
+        } catch (e) {
+            console.error(e);
+            errorBox.textContent = 'Failed to load games. Open browser console (F12) and tell me what error you see.';
+            errorBox.classList.remove('hidden');
+            grid.innerHTML = '<p class="text-red-400 text-center py-12">Try refreshing or check console (F12)</p>';
         }
     }
 
-    // Apply accent color
-    document.documentElement.style.setProperty('--accent', cfg.accent);
-    load();
+    // Run it
+    document.documentElement.style.setProperty('--accent', '#3b82f6');
+    loadData();
 </script>
 </body>
 </html>
