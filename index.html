@@ -69,6 +69,23 @@
             box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
             z-index: 10;
         }
+
+        /* Video card for Press */
+        .video-card {
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .video-card:hover { transform: translateY(-4px); }
+        .video-card .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-card:hover .play-overlay { opacity: 1; }
     </style>
 </head>
 <body class="antialiased">
@@ -84,6 +101,8 @@
                 <a href="#games" class="hover:text-blue-400 transition">My Games</a>
                 <a href="#contributed" class="hover:text-blue-400 transition">Contributions</a>
                 <a href="#groups" class="hover:text-blue-400 transition">Studios</a>
+                <a href="#press" class="hover:text-blue-400 transition">Press</a>
+                <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
             </div>
         </div>
     </nav>
@@ -115,7 +134,7 @@
             </div>
         </div>
 
-        <!-- My Games Section (Owned / Led) -->
+        <!-- My Games Section -->
         <section id="games" class="mb-24 reveal" style="animation-delay: 0.4s;">
             <div class="flex items-end justify-between mb-6">
                 <h2 class="heading-font text-3xl uppercase italic tracking-tighter">My Games</h2>
@@ -139,11 +158,41 @@
             </div>
         </section>
 
-        <!-- Groups Section -->
-        <section id="groups" class="reveal" style="animation-delay: 0.6s;">
+        <!-- Press Section -->
+        <section id="press" class="mb-24 reveal" style="animation-delay: 0.6s;">
+            <div class="flex items-end justify-between mb-6">
+                <h2 class="heading-font text-3xl uppercase italic tracking-tighter">Press &amp; Media</h2>
+                <div class="h-[1px] flex-grow mx-8 bg-white/10 hidden md:block"></div>
+            </div>
+            <p class="text-gray-400 text-sm max-w-md -mt-2 mb-8">Featured videos, interviews, and coverage</p>
+            <div id="press-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- YouTube cards populated by JS -->
+            </div>
+        </section>
+
+        <!-- Groups / Studios Section -->
+        <section id="groups" class="mb-24 reveal" style="animation-delay: 0.7s;">
             <h2 class="heading-font text-3xl uppercase italic tracking-tighter mb-10">Studios</h2>
             <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Groups populated by JS -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal" style="animation-delay: 0.8s;">
+            <div class="flex items-end justify-between mb-6">
+                <h2 class="heading-font text-3xl uppercase italic tracking-tighter">Contact</h2>
+                <div class="h-[1px] flex-grow mx-8 bg-white/10 hidden md:block"></div>
+            </div>
+            <div class="glass rounded-3xl p-12 max-w-md mx-auto text-center">
+                <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-4xl">💬</div>
+                <h3 class="text-2xl font-bold heading-font tracking-tighter mb-2">Let's Build Together</h3>
+                <p class="text-gray-400 mb-8">Hit me up on Discord — always open to collabs, feedback, or just chatting about Roblox dev!</p>
+                <a href="https://discord.com/users/1018621276165767299" target="_blank"
+                   class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-widest px-10 py-4 rounded-3xl transition text-lg">
+                    <span class="text-2xl">🔗</span>
+                    OPEN DISCORD PROFILE
+                </a>
             </div>
         </section>
     </main>
@@ -163,6 +212,13 @@
                 { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
                 { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
                 { name: "StarWoven Productions", desc: "Official Group - Join for updates & events!", id: "35252165", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
+            ],
+            pressVideos: [
+                "t-oIX_4KJL8",
+                "zIAhTM96-xg",
+                "Sutd2T5Map8",
+                "YYfX44s09Zc",
+                "XER43id1xZk"
             ]
         };
 
@@ -181,11 +237,10 @@
                 }
             } catch (e) { console.warn("Avatar load failed", e); }
 
-            // Helper to fetch + render games (now accepts isContributed flag)
+            // Helper to fetch + render games
             async function renderGameSection(placeIds, gridElementId, isContributed = false) {
                 const grid = document.getElementById(gridElementId);
                 try {
-                    // Convert Place IDs → Universe IDs
                     const universePromises = placeIds.map(async (placeId) => {
                         try {
                             const res = await fetch(`https://apis.roproxy.com/universes/v1/places/${placeId}/universe`);
@@ -206,18 +261,15 @@
 
                     const uniString = universeIds.join(',');
 
-                    // Fetch game details
                     const detailsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${uniString}`);
                     const detailsData = await detailsRes.json();
                     let gamesList = detailsData.data || [];
 
-                    // Sort: highest CCU first, then highest visits on tie
                     gamesList.sort((a, b) => {
                         if (b.playing !== a.playing) return b.playing - a.playing;
                         return b.visits - a.visits;
                     });
 
-                    // Fetch thumbnails
                     const thumbRes = await fetch(`https://thumbnails.roproxy.com/v1/games/icons?universeIds=${uniString}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
                     const thumbData = await thumbRes.json();
                     const thumbMap = {};
@@ -225,7 +277,6 @@
                         thumbData.data.forEach(t => { thumbMap[t.targetId] = t.imageUrl; });
                     }
 
-                    // Render cards
                     const gamesHTML = gamesList.map(g => {
                         const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
                         return `
@@ -259,10 +310,10 @@
                 }
             }
 
-            // 2. Load My Games (Owned / Led)
+            // 2. Load My Games
             await renderGameSection(cfg.manualGames, 'games-grid', false);
 
-            // Update global stats ONLY from My Games (contributions are excluded)
+            // Update global stats ONLY from My Games
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
                     try {
@@ -284,7 +335,26 @@
             // 3. Load Contributions
             await renderGameSection(cfg.contributedGames, 'contributed-grid', true);
 
-            // 4. Load Groups (sorted by most members)
+            // 4. Load Press Videos
+            const pressGrid = document.getElementById('press-grid');
+            const pressHTML = cfg.pressVideos.map(id => `
+                <a href="https://www.youtube.com/watch?v=${id}" target="_blank" class="video-card glass rounded-3xl overflow-hidden flex flex-col h-full relative group">
+                    <div class="img-container">
+                        <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="YouTube Video" class="w-full h-full object-cover">
+                        <div class="play-overlay">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-2xl group-active:scale-95 transition">
+                                <span class="text-4xl text-black">▶</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <p class="uppercase text-xs tracking-widest text-blue-400 font-bold">Watch on YouTube</p>
+                    </div>
+                </a>
+            `).join('');
+            pressGrid.innerHTML = pressHTML;
+
+            // 5. Load Groups (sorted by most members)
             const groupsGrid = document.getElementById('groups-grid');
             try {
                 const groupIds = cfg.groups.map(g => g.id).join(',');
