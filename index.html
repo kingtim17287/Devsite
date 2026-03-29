@@ -66,7 +66,7 @@
             <span class="heading-font text-xl tracking-tighter italic" style="color: var(--accent);">KINGTIM17287</span>
             <div class="flex gap-6 text-sm font-bold uppercase tracking-widest">
                 <a href="#games" class="hover:text-blue-400 transition">Games</a>
-                <a href="#contributed" class="hover:text-blue-400 transition">Contributions</a>
+                <a href="#contributed" class="hover:text-blue-400 transition">Contributed</a>
                 <a href="#groups" class="hover:text-blue-400 transition">Groups</a>
             </div>
         </div>
@@ -138,7 +138,7 @@
             name: "KingTim17287",
             accentHex: "#3b82f6",
             manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
-            contributedUniverses: [107753480114427, 122606989565107],   // ← NEW: Universe IDs you gave
+            contributedGames: [107753480114427, 122606989565107],   // NEW: Games you contribute to
             groups: [
                 { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
                 { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
@@ -161,41 +161,51 @@
                 }
             } catch (e) { console.warn("Avatar load failed", e); }
 
-            // 2. Load Main Games (your owned projects)
-            const gamesGrid = document.getElementById('games-grid');
-            try {
-                const universePromises = cfg.manualGames.map(async (placeId) => {
-                    try {
-                        const res = await fetch(`https://apis.roproxy.com/universes/v1/places/${placeId}/universe`);
-                        if (res.ok) {
-                            const data = await res.json();
-                            return data.universeId;
-                        }
-                    } catch (e) {}
-                    return null;
-                });
-                const resolvedUniverses = await Promise.all(universePromises);
-                const universeIds = resolvedUniverses.filter(id => id !== null);
+            // Helper to fetch + render games (used for both main games and contributed games)
+            async function renderGameSection(placeIds, gridElementId) {
+                const grid = document.getElementById(gridElementId);
+                try {
+                    // Convert Place IDs → Universe IDs
+                    const universePromises = placeIds.map(async (placeId) => {
+                        try {
+                            const res = await fetch(`https://apis.roproxy.com/universes/v1/places/${placeId}/universe`);
+                            if (res.ok) {
+                                const data = await res.json();
+                                return data.universeId;
+                            }
+                        } catch (e) {}
+                        return null;
+                    });
+                    const resolvedUniverses = await Promise.all(universePromises);
+                    const universeIds = resolvedUniverses.filter(id => id !== null);
 
-                if (universeIds.length === 0) {
-                    gamesGrid.innerHTML = `<p class="col-span-full text-center text-white/50 py-12">No games found. Please check your Place IDs.</p>`;
-                } else {
+                    if (universeIds.length === 0) {
+                        grid.innerHTML = `<p class="col-span-full text-center text-white/50 py-12">No games found for this section.</p>`;
+                        return;
+                    }
+
                     const uniString = universeIds.join(',');
+
+                    // Fetch game details
                     const detailsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${uniString}`);
                     const detailsData = await detailsRes.json();
                     let gamesList = detailsData.data || [];
 
-                    // Sort by highest CCU → then highest visits
+                    // Sort: highest CCU first, then highest visits on tie
                     gamesList.sort((a, b) => {
                         if (b.playing !== a.playing) return b.playing - a.playing;
                         return b.visits - a.visits;
                     });
 
+                    // Fetch thumbnails
                     const thumbRes = await fetch(`https://thumbnails.roproxy.com/v1/games/icons?universeIds=${uniString}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
                     const thumbData = await thumbRes.json();
                     const thumbMap = {};
-                    if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
+                    if (thumbData.data) {
+                        thumbData.data.forEach(t => { thumbMap[t.targetId] = t.imageUrl; });
+                    }
 
+                    // Render cards
                     const gamesHTML = gamesList.map(g => `
                         <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full">
                             <div class="img-container">
@@ -219,70 +229,40 @@
                         </div>
                     `).join('');
 
-                    gamesGrid.innerHTML = gamesHTML;
+                    grid.innerHTML = gamesHTML;
+                } catch (e) {
+                    console.error(e);
+                    grid.innerHTML = `<p class="col-span-full text-red-400 text-center py-12">Could not load games for this section.</p>`;
+                }
+            }
 
-                    // Update global stats (only from your main games)
-                    const totalPlaying = gamesList.reduce((sum, g) => sum + (g.playing || 0), 0);
-                    const totalVisits = gamesList.reduce((sum, g) => sum + (g.visits || 0), 0);
+            // 2. Load Main Games (Project Catalog)
+            const gamesGrid = document.getElementById('games-grid');
+            await renderGameSection(cfg.manualGames, 'games-grid');
+
+            // Update global stats from main games only (as before)
+            try {
+                const uniString = (await Promise.all(cfg.manualGames.map(async p => {
+                    try {
+                        const r = await fetch(`https://apis.roproxy.com/universes/v1/places/${p}/universe`);
+                        return r.ok ? (await r.json()).universeId : null;
+                    } catch { return null; }
+                }))).filter(Boolean).join(',');
+                if (uniString) {
+                    const detailsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${uniString}`);
+                    const data = await detailsRes.json();
+                    const list = data.data || [];
+                    const totalPlaying = list.reduce((sum, g) => sum + (g.playing || 0), 0);
+                    const totalVisits = list.reduce((sum, g) => sum + (g.visits || 0), 0);
                     document.getElementById('total-playing').innerText = totalPlaying.toLocaleString();
                     document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
                 }
-            } catch (e) {
-                console.error(e);
-                gamesGrid.innerHTML = `<p class="col-span-full text-red-400 text-center py-12">Could not connect to Roblox API. Please try again later.</p>`;
-            }
+            } catch (e) { console.warn("Stats update skipped", e); }
 
-            // 3. Load Contributed Games (NEW SECTION)
-            const contributedGrid = document.getElementById('contributed-grid');
-            if (cfg.contributedUniverses && cfg.contributedUniverses.length > 0) {
-                try {
-                    const uniString = cfg.contributedUniverses.join(',');
-                    const detailsRes = await fetch(`https://games.roproxy.com/v1/games?universeIds=${uniString}`);
-                    const detailsData = await detailsRes.json();
-                    let contribList = detailsData.data || [];
+            // 3. Load Contributed Games (NEW section)
+            await renderGameSection(cfg.contributedGames, 'contributed-grid');
 
-                    // Same sorting: highest CCU → highest visits
-                    contribList.sort((a, b) => {
-                        if (b.playing !== a.playing) return b.playing - a.playing;
-                        return b.visits - a.visits;
-                    });
-
-                    const thumbRes = await fetch(`https://thumbnails.roproxy.com/v1/games/icons?universeIds=${uniString}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
-                    const thumbData = await thumbRes.json();
-                    const thumbMap = {};
-                    if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
-
-                    const contribHTML = contribList.map(g => `
-                        <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full">
-                            <div class="img-container">
-                                <img src="${thumbMap[g.id] || ''}" alt="${g.name}">
-                            </div>
-                            <div class="p-6 flex flex-col flex-1">
-                                <h3 class="text-2xl font-bold heading-font tracking-tighter mb-3">${g.name}</h3>
-                                <p class="desc-truncate text-gray-300 flex-1 text-sm mb-6">${g.description || 'No description available.'}</p>
-                                <div class="flex justify-between text-xs mb-6 font-medium">
-                                    <div class="flex items-center gap-1">
-                                        <span class="text-emerald-400">◉</span>
-                                        LIVE <span class="font-black text-emerald-400">${(g.playing || 0).toLocaleString()}</span>
-                                    </div>
-                                    <div>Visits <span class="font-black text-blue-400">${(g.visits || 0).toLocaleString()}</span></div>
-                                </div>
-                                <a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank"
-                                   class="mt-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest py-3 rounded-2xl transition">
-                                    PLAY NOW →
-                                </a>
-                            </div>
-                        </div>
-                    `).join('');
-
-                    contributedGrid.innerHTML = contribHTML || `<p class="col-span-full text-center text-white/50 py-12">No contributed games found at the moment.</p>`;
-                } catch (e) {
-                    console.error(e);
-                    contributedGrid.innerHTML = `<p class="col-span-full text-red-400 text-center py-12">Could not load contributed games.</p>`;
-                }
-            }
-
-            // 4. Load Groups + member counts (sorted by most members first)
+            // 4. Load Groups with icons + member counts (sorted by most members)
             const groupsGrid = document.getElementById('groups-grid');
             try {
                 const groupIds = cfg.groups.map(g => g.id).join(',');
@@ -290,10 +270,10 @@
                 const groupThumbData = await groupThumbRes.json();
                 const groupThumbMap = {};
                 if (groupThumbData.data) {
-                    groupThumbData.data.forEach(t => groupThumbMap[t.targetId] = t.imageUrl);
+                    groupThumbData.data.forEach(t => { groupThumbMap[t.targetId] = t.imageUrl; });
                 }
 
-                // Fetch member count for each group
+                // Fetch member counts
                 const enrichedGroups = await Promise.all(cfg.groups.map(async (g) => {
                     try {
                         const res = await fetch(`https://groups.roproxy.com/v1/groups/${g.id}`);
@@ -305,7 +285,7 @@
                     return { ...g, memberCount: 0 };
                 }));
 
-                // === NEW: Sort studios by highest member count first ===
+                // === NEW: Sort studios by most members first ===
                 enrichedGroups.sort((a, b) => b.memberCount - a.memberCount);
 
                 const groupsHTML = enrichedGroups.map(g => `
