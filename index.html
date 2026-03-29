@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,48 +7,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
-        :root { --accent: #3b82f6; --accent-glow: rgba(59, 130, 246, 0.5); --bg: #030712; }
+        :root { --accent: #3b82f6; --bg: #030712; }
         body { 
             background-color: var(--bg); 
             color: #f8fafc; 
-            font-family: 'Space Grotesk', sans-serif;
-            background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #030712 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth; 
         }
-        .heading-font { font-family: 'Syncopate', sans-serif; }
-        
-        /* Modern Glass Effect */
+        /* Animated Mesh Background */
+        .mesh-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 0%, rgba(147, 51, 234, 0.05) 0%, transparent 40%);
+        }
         .glass { 
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
             transition: all 0.3s ease;
         }
-        .glass:hover { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-
-        /* Animated Background Blobs */
-        .blob {
-            position: fixed; width: 500px; height: 500px;
-            background: var(--accent); filter: blur(120px);
-            opacity: 0.15; z-index: -1; border-radius: 50%;
+        .glass:hover { border-color: var(--accent); background: rgba(255, 255, 255, 0.04); }
+        .hero-gradient {
+            background: linear-gradient(to bottom, var(--accent), #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .game-card img { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-        .game-card:hover img { transform: scale(1.1) rotate(1deg); }
-        
-        .stat-value { text-shadow: 0 0 20px var(--accent-glow); }
-        
-        @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .reveal { animation: reveal 0.8s ease forwards; }
+        .img-container { aspect-ratio: 16/9; overflow: hidden; border-radius: 1rem; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .group:hover .img-container img { transform: scale(1.08); }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .float { animation: float 6s ease-in-out infinite; }
+        .loader { border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--accent); border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="antialiased">
-    <div class="blob" style="top: -10%; left: -10%;"></div>
-    <div class="blob" style="bottom: -10%; right: -10%; background: #8b5cf6;"></div>
+    <div class="mesh-bg"></div>
 
     <nav class="fixed top-0 w-full z-50 py-4 px-6 glass border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="heading-font text-xl tracking-tighter italic" style="color: var(--accent);">KINGTIM17287</span>
-            <div class="flex gap-6 text-sm font-bold uppercase tracking-widest">
+            <span class="font-extrabold text-xl tracking-tighter italic uppercase" style="color: var(--accent);">KINGTIM17287</span>
+            <div class="flex gap-6 text-sm font-bold uppercase tracking-widest opacity-70">
                 <a href="#games" class="hover:text-blue-400 transition">Games</a>
                 <a href="#groups" class="hover:text-blue-400 transition">Groups</a>
             </div>
@@ -57,57 +56,59 @@
 
     <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
         <!-- Hero Section -->
-        <div class="flex flex-col items-center text-center mb-24 reveal">
-            <div class="relative mb-8">
-                <div class="absolute inset-0 bg-blue-500 blur-3xl opacity-20 rounded-full"></div>
-                <img id="avatar-img" class="relative w-48 h-48 md:w-56 md:h-56 rounded-full border-2 border-white/10 p-2 object-cover bg-gray-900" src="" alt="Avatar">
+        <header class="text-center mb-24">
+            <div class="relative inline-block mb-8">
+                <div class="absolute -inset-4 bg-blue-500/20 blur-3xl rounded-full"></div>
+                <img id="avatar-img" class="w-48 h-48 rounded-full border-4 border-white/10 relative float shadow-2xl" src="https://tr.rbxcdn.com">
             </div>
-            <h1 class="heading-font text-5xl md:text-7xl mb-4 tracking-tighter">CREATING <span style="color: var(--accent);">EXPERIENCES</span></h1>
-            <p class="text-gray-400 max-w-2xl text-lg">Lead Developer at Boden Interactive. Specializing in high-octane gameplay and immersive Roblox environments.</p>
+            <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter uppercase italic hero-gradient">KingTim17287</h1>
+            <p class="text-lg md:text-xl opacity-60 max-w-2xl mx-auto leading-relaxed">Building immersive experiences on Roblox. Specialist in LAVA, Combat, and Tower Defense mechanics.</p>
+        </header>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+            <div class="glass rounded-3xl p-10 text-center relative overflow-hidden group">
+                <div id="total-playing" class="text-7xl font-black italic text-emerald-400">0</div>
+                <p class="uppercase text-xs font-bold tracking-[0.3em] text-emerald-400/60 mt-4">Current Players</p>
+            </div>
+            <div class="glass rounded-3xl p-10 text-center relative overflow-hidden group">
+                <div id="total-visits" class="text-7xl font-black italic text-blue-400">0</div>
+                <p class="uppercase text-xs font-bold tracking-[0.3em] text-blue-400/60 mt-4">Lifetime Visits</p>
+            </div>
         </div>
 
-        <!-- Stats Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 reveal" style="animation-delay: 0.2s;">
-            <div class="glass p-8 rounded-3xl md:col-span-2 flex flex-col justify-center">
-                <span class="uppercase text-xs tracking-[0.3em] text-blue-400 font-bold mb-2">Network Reach</span>
-                <div id="total-visits" class="stat-value text-7xl font-bold heading-font">0</div>
-                <p class="text-gray-500 mt-2 italic text-sm">Lifetime unique player visits across all titles</p>
+        <!-- Games Grid -->
+        <section id="games" class="mb-24">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <p class="text-blue-500 font-bold uppercase tracking-widest text-sm mb-2">Portfolio</p>
+                    <h2 class="text-5xl font-black italic uppercase tracking-tighter">My Creations</h2>
+                </div>
+                <div id="game-loader" class="loader hidden"></div>
             </div>
-            <div class="glass p-8 rounded-3xl flex flex-col justify-center border-emerald-500/20">
-                <span class="uppercase text-xs tracking-[0.3em] text-emerald-400 font-bold mb-2">Live Now</span>
-                <div id="total-playing" class="stat-value text-7xl font-bold heading-font text-emerald-400">0</div>
-                <p class="text-gray-500 mt-2 italic text-sm">Concurrent players online</p>
-            </div>
-        </div>
-
-        <!-- Games Section -->
-        <section id="games" class="mb-24 reveal" style="animation-delay: 0.4s;">
-            <div class="flex items-end justify-between mb-10">
-                <h2 class="heading-font text-3xl uppercase italic tracking-tighter">Project Catalog</h2>
-                <div class="h-[1px] flex-grow mx-8 bg-white/10 hidden md:block"></div>
-            </div>
-            <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Games load here -->
+            <div id="games-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Games injected here -->
             </div>
         </section>
 
-        <!-- Groups Section -->
-        <section id="groups" class="reveal" style="animation-delay: 0.6s;">
-            <h2 class="heading-font text-3xl uppercase italic tracking-tighter mb-10">Studios</h2>
+        <!-- Communities -->
+        <section id="groups">
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-12">Founding Communities</h2>
             <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Groups load here -->
+                <!-- Groups injected here -->
             </div>
         </section>
     </main>
 
-    <footer class="py-12 border-t border-white/5 text-center text-gray-600 text-sm">
-        <p>© 2026 KINGTIM17287 • DESIGNED FOR THE METAVERSE</p>
+    <footer class="glass mt-20 py-12 border-t border-white/5 text-center">
+        <p class="text-sm font-bold opacity-40 uppercase tracking-widest">© 2024 KingTim17287 • Built for the Metaverse</p>
     </footer>
 
     <script>
-        const portfolioConfig = {
+        const config = {
             userId: "3808496324",
-            manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
+            accent: "#3b82f6",
+            placeIds: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
             groups: [
                 { name: "Boden Interactive", id: "426353491", link: "https://www.roblox.com" },
                 { name: "Woven Productions", id: "7457551", link: "https://www.roblox.com" },
@@ -116,26 +117,63 @@
         };
 
         async function init() {
-            // Avatar Load
-            const avRes = await fetch(`https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${portfolioConfig.userId}&size=420x420&format=Png&isCircular=false`);
-            const avData = await avRes.json();
-            document.getElementById('avatar-img').src = avData.data[0].imageUrl;
+            // 1. Load Avatar
+            const avatarRes = await fetch(`https://thumbnails.roproxy.com{config.userId}&size=420x420&format=Png&isCircular=false`);
+            const avatarData = await avatarRes.json();
+            if (avatarData.data?.[0]) document.getElementById('avatar-img').src = avatarData.data[0].imageUrl;
 
-            // Load Groups
-            const groupsGrid = document.getElementById('groups-grid');
-            groupsGrid.innerHTML = portfolioConfig.groups.map(g => `
-                <a href="${g.link}" target="_blank" class="glass p-6 rounded-2xl flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-white/5 rounded-full mb-4 flex items-center justify-center group-hover:scale-110 transition">
-                        <span class="text-2xl">🛡️</span>
+            // 2. Load Games
+            document.getElementById('game-loader').classList.remove('hidden');
+            const universes = await Promise.all(config.placeIds.map(async id => {
+                const res = await fetch(`https://apis.roproxy.com{id}/universe`);
+                const data = await res.json();
+                return data.universeId;
+            }));
+
+            const uniIds = universes.filter(id => id).join(',');
+            const [details, thumbs] = await Promise.all([
+                fetch(`https://games.roproxy.com{uniIds}`).then(r => r.json()),
+                fetch(`https://thumbnails.roproxy.com{uniIds}&size=512x512&format=Png`).then(r => r.json())
+            ]);
+
+            const thumbMap = Object.fromEntries(thumbs.data.map(t => [t.targetId, t.imageUrl]));
+            let totalV = 0, totalP = 0;
+
+            document.getElementById('games-grid').innerHTML = details.data.map(g => {
+                totalV += g.visits;
+                totalP += g.playing;
+                return `
+                    <div class="glass rounded-[2rem] p-6 group flex flex-col">
+                        <div class="img-container mb-6 shadow-xl">
+                            <img src="${thumbMap[g.id]}" alt="${g.name}">
+                        </div>
+                        <h3 class="text-3xl font-extrabold mb-3 tracking-tight">${g.name}</h3>
+                        <p class="opacity-50 text-sm line-clamp-2 mb-6 flex-grow leading-relaxed">${g.description || 'No description available.'}</p>
+                        <div class="flex items-center justify-between mt-auto pt-6 border-t border-white/5">
+                            <div class="flex gap-4">
+                                <div class="text-xs font-bold uppercase"><span class="text-emerald-400">${g.playing.toLocaleString()}</span> Active</div>
+                                <div class="text-xs font-bold uppercase"><span class="text-blue-400">${(g.visits / 1000000).toFixed(1)}M+</span> Visits</div>
+                            </div>
+                            <a href="https://www.roblox.com{g.rootPlaceId}" target="_blank" class="bg-white/10 hover:bg-white text-white hover:text-black px-5 py-2 rounded-full text-xs font-black transition-all uppercase tracking-widest">Play</a>
+                        </div>
                     </div>
-                    <h3 class="font-bold uppercase tracking-widest text-sm">${g.name}</h3>
+                `;
+            }).join('');
+
+            document.getElementById('total-playing').innerText = totalP.toLocaleString();
+            document.getElementById('total-visits').innerText = (totalV / 1000000).toFixed(1) + "M";
+            document.getElementById('game-loader').classList.add('hidden');
+
+            // 3. Load Groups
+            document.getElementById('groups-grid').innerHTML = config.groups.map(group => `
+                <a href="${group.link}" target="_blank" class="glass p-8 rounded-3xl text-center group block">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition">
+                        <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h4 class="font-bold text-lg mb-1">${group.name}</h4>
+                    <p class="text-xs opacity-40 uppercase tracking-widest">Official Community</p>
                 </a>
             `).join('');
-
-            // Load Games (Simplified for demo - logic matches your original)
-            // You can paste your existing Universe ID & Thumbnails fetch logic here
-            const gamesGrid = document.getElementById('games-grid');
-            // ... (Fetch logic from your original code goes here)
         }
 
         init();
