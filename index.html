@@ -24,6 +24,7 @@
     </style>
 </head>
 <body class="antialiased tracking-tight">
+
 <script>
     const portfolioConfig = {
         userId: "3808496324",
@@ -32,9 +33,17 @@
         backgroundColor: "#0b1120",
         textColor: "#f8fafc",
         avatarAnimation: "Yes",
-        // Only fetch and display these specific IDs (can be Place IDs or Universe IDs)
-        manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
-        // Your 3 groups
+        // ✅ FIXED: Place IDs as STRINGS (critical for large Roblox IDs)
+        manualGames: [
+            "106988495261000",
+            "77942507005261",
+            "95744979554149",
+            "104877476991790",
+            "14044594226",
+            "82126039807655",
+            "101246660655753",
+            "108311894104237"
+        ],
         groups: [
             { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
             { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
@@ -46,17 +55,22 @@
         }
     };
 </script>
+
 <nav class="fixed top-0 w-full z-50 py-3 md:py-5 px-4 md:px-6 glass">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
         <span id="nav-name" class="font-black text-2xl italic uppercase tracking-tighter" style="color: var(--accent);">KINGTIM17287</span>
     </div>
 </nav>
+
 <div class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
+    <!-- AVATAR -->
     <div class="text-center mb-12">
         <div id="avatar-container" class="relative inline-block avatar-float">
-            <img id="avatar-img" class="w-64 h-64 rounded-full border-8 shadow-2xl object-cover" style="border-color: var(--accent);">
+            <img id="avatar-img" class="w-64 h-64 rounded-full border-8 shadow-2xl" style="border-color: var(--accent);">
         </div>
     </div>
+
+    <!-- TOTAL STATS -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
         <div class="stat-card rounded-3xl p-8 text-center">
             <div id="total-playing" class="text-6xl font-black italic text-emerald-400">0</div>
@@ -67,6 +81,8 @@
             <p class="uppercase text-sm tracking-widest text-blue-400/80 mt-2">TOTAL VISITS</p>
         </div>
     </div>
+
+    <!-- MY GAMES -->
     <section class="mb-16">
         <div class="flex items-center gap-3 mb-8">
             <div class="h-8 w-2" style="background:var(--accent)"></div>
@@ -74,6 +90,8 @@
         </div>
         <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
     </section>
+
+    <!-- MY COMMUNITIES -->
     <section>
         <div class="flex items-center gap-3 mb-8">
             <div class="h-8 w-2" style="background:var(--accent)"></div>
@@ -82,8 +100,9 @@
         <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
     </section>
 </div>
+
 <footer class="glass mt-20 border-t border-white/5 py-10 text-center">
-    <div class="text-xs font-bold">© 2026 KingTim17287 • Fixed by AI</div>
+    <div class="text-xs font-bold">© 2026 KingTim17287 • Template by UN6107617</div>
 </footer>
 
 <script>
@@ -93,96 +112,75 @@
         document.getElementById('nav-name').innerText = cfg.name;
 
         try {
-            // 1. Fetch User Avatar via standard Proxy
-            const avatarRes = await fetch(`https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${cfg.userId}&size=420x420&format=Png&isCircular=false`);
-            const avatarData = await avatarRes.json();
-            if (avatarData.data && avatarData.data.length > 0) {
-                document.getElementById('avatar-img').src = avatarData.data[0].imageUrl;
+            const res = await fetch(`https://api.un6107617.dev/portfolio/${cfg.userId}`);
+            const data = await res.json();
+
+            // Avatar
+            if (data.user?.avatar) {
+                document.getElementById('avatar-img').src = data.user.avatar;
             }
 
-            // 2. Fetch User & Group Games to find the matches
-            let allGames = [];
-            
-            // Get personal games
-            const userGamesRes = await fetch(`https://games.roproxy.com/v2/users/${cfg.userId}/games?limit=50`);
-            const userGamesData = await userGamesRes.json();
-            if (userGamesData.data) allGames.push(...userGamesData.data);
+            // ✅ FIXED: Safe string filtering (this was the main bug)
+            const filteredGames = data.games.filter(g => 
+                cfg.manualGames.includes(String(g.placeId))
+            );
 
-            // Get group games
-            for (const group of cfg.groups) {
-                const groupGamesRes = await fetch(`https://games.roproxy.com/v2/groups/${group.id}/games?limit=50`);
-                const groupGamesData = await groupGamesRes.json();
-                if (groupGamesData.data) allGames.push(...groupGamesData.data);
-            }
-
-            // 3. Filter down to only the games in the manual array
-            const allowed = new Set(cfg.manualGames);
-            const filteredGames = allGames.filter(g => allowed.has(Number(g.rootPlaceId)) || allowed.has(Number(g.id)));
-
-            // 4. Fetch Game Thumbnails and Render
+            // Render games
+            let gamesHTML = '';
             if (filteredGames.length > 0) {
-                const universeIds = filteredGames.map(g => g.id).join(',');
-                const thumbRes = await fetch(`https://thumbnails.roproxy.com/v1/games/icons?universeIds=${universeIds}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
-                const thumbData = await thumbRes.json();
-                
-                // Map the images to their Universe ID so they sync up properly
-                const thumbMap = {};
-                if (thumbData.data) {
-                    thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
-                }
-
-                let gamesHTML = filteredGames.map(g => `
+                gamesHTML = filteredGames.map(g => `
                     <div class="glass rounded-3xl overflow-hidden flex flex-col group">
-                        <div class="img-container"><img src="${thumbMap[g.id] || ''}"></div>
-                        <div class="p-8 flex flex-col flex-grow">
+                        <div class="img-container">
+                            <img src="${g.thumbnail}" alt="${g.name}">
+                        </div>
+                        <div class="p-8">
                             <h3 class="text-2xl font-black mb-2">${g.name}</h3>
-                            <p class="opacity-70 mb-6 desc-truncate flex-grow">${g.description || 'No description provided.'}</p>
+                            <p class="opacity-70 mb-6">${g.description || 'No description'}</p>
                             <div class="flex justify-between text-xs mb-6">
                                 <div>CCU <span class="font-black text-emerald-400">${(g.playing || 0).toLocaleString()}</span></div>
                                 <div>Visits <span class="font-black text-blue-400">${(g.visits || 0).toLocaleString()}</span></div>
                             </div>
-                            <a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank" class="font-black text-xs uppercase block text-center" style="color:var(--accent)">PLAY →</a>
+                            <a href="https://www.roblox.com/games/${g.placeId}" target="_blank" 
+                               class="font-black text-xs uppercase block text-center py-3 rounded-2xl hover:bg-white/10 transition" 
+                               style="color:var(--accent)">PLAY →</a>
                         </div>
-                    </div>`).join('');
-                document.getElementById('games-grid').innerHTML = gamesHTML;
-
-                // Update Total Stats
-                const totalPlaying = filteredGames.reduce((sum, g) => sum + (g.playing || 0), 0);
-                const totalVisits = filteredGames.reduce((sum, g) => sum + (g.visits || 0), 0);
-                document.getElementById('total-playing').innerText = totalPlaying.toLocaleString();
-                document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
+                    </div>
+                `).join('');
             } else {
-                document.getElementById('games-grid').innerHTML = `<p class="col-span-2 text-center text-white/50 py-12">No games found. Double-check your manualGames IDs.</p>`;
+                gamesHTML = `<p class="col-span-full text-center py-12 text-amber-400">No matching games found.<br>Double-check your manualGames IDs in the config.</p>`;
             }
+            document.getElementById('games-grid').innerHTML = gamesHTML;
 
-            // 5. Fetch Group Icons by extracting JSON properly
-            const groupIds = cfg.groups.map(g => g.id).join(',');
-            const groupThumbRes = await fetch(`https://thumbnails.roproxy.com/v1/groups/icons?groupIds=${groupIds}&size=420x420&format=Png`);
-            const groupThumbData = await groupThumbRes.json();
-            
-            const groupThumbMap = {};
-            if (groupThumbData.data) {
-                groupThumbData.data.forEach(t => groupThumbMap[t.targetId] = t.imageUrl);
-            }
+            // Total stats
+            const totalPlaying = filteredGames.reduce((sum, g) => sum + (g.playing || 0), 0);
+            const totalVisits = filteredGames.reduce((sum, g) => sum + (g.visits || 0), 0);
+            document.getElementById('total-playing').innerText = totalPlaying.toLocaleString();
+            document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
 
+            // Render communities
             const groupsHTML = cfg.groups.map(g => `
                 <div class="glass rounded-3xl overflow-hidden flex flex-col group">
                     <div class="img-container">
-                        <img src="${groupThumbMap[g.id] || ''}" alt="${g.name}">
+                        <img src="https://thumbnails.roproxy.com/v1/groups/icons?groupIds=${g.id}&size=420x420&format=Png" alt="${g.name}">
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
+                    <div class="p-8">
                         <h3 class="text-2xl font-black mb-2">${g.name}</h3>
-                        <p class="opacity-70 mb-6 desc-truncate flex-grow">${g.desc}</p>
-                        <a href="${g.link}" target="_blank" class="font-black text-xs uppercase block text-center mt-auto" style="color:var(--accent)">JOIN GROUP →</a>
+                        <p class="opacity-70 mb-6">${g.desc}</p>
+                        <a href="${g.link}" target="_blank" 
+                           class="font-black text-xs uppercase block text-center py-3 rounded-2xl hover:bg-white/10 transition" 
+                           style="color:var(--accent)">JOIN GROUP →</a>
                     </div>
-                </div>`).join('');
+                </div>
+            `).join('');
             document.getElementById('groups-grid').innerHTML = groupsHTML;
 
         } catch (e) {
-            console.error(e);
-            document.getElementById('games-grid').innerHTML = `<p class="text-red-400 text-center py-12 col-span-2">Could not connect to Roblox Servers. Please refresh.</p>`;
+            console.error("Portfolio load error:", e);
+            document.getElementById('games-grid').innerHTML = 
+                `<p class="text-red-400 text-center py-12">Could not load games — please refresh the page.</p>`;
         }
     }
+
     document.addEventListener('DOMContentLoaded', load);
 </script>
 </body>
