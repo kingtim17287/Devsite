@@ -33,14 +33,17 @@
         backgroundColor: "#0b1120",
         textColor: "#f8fafc",
         avatarAnimation: "Yes",
+
         // ONLY these 8 games
         manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
+
         // Your 3 groups
         groups: [
             { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
             { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
             { name: "StarWoven Productions", desc: "Official Group - Join for updates & events!", id: "35252165", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
         ],
+
         links: {
             "Roblox": "https://www.roblox.com/users/3808496324/profile",
             "GitHub": "https://github.com/kingtim17287"
@@ -56,14 +59,14 @@
 
 <div class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
 
-    <!-- AVATAR (exact same as original template) -->
+    <!-- AVATAR (exact same as the template you sent) -->
     <div class="text-center mb-12">
         <div id="avatar-container" class="relative inline-block avatar-float">
             <img id="avatar-img" class="w-64 h-64 rounded-full border-8 shadow-2xl" style="border-color: var(--accent);">
         </div>
     </div>
 
-    <!-- TOP TOTAL STATS -->
+    <!-- TOTAL STATS -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
         <div class="stat-card rounded-3xl p-8 text-center">
             <div id="total-playing" class="text-6xl font-black italic text-emerald-400">0</div>
@@ -100,7 +103,7 @@
 </footer>
 
 <script>
-    async function loadData() {
+    async function load() {
         const cfg = portfolioConfig;
         document.documentElement.style.setProperty('--accent', cfg.accentHex);
         document.getElementById('nav-name').innerText = cfg.name;
@@ -109,9 +112,7 @@
             const res = await fetch(`https://api.un6107617.dev/portfolio/${cfg.userId}`);
             const data = await res.json();
 
-            if (!data.success) throw new Error("API failed");
-
-            // Avatar (exact same as original template)
+            // Avatar (exact same as your template)
             document.getElementById('avatar-img').src = data.user.avatar;
 
             // Filter to ONLY your 8 games
@@ -134,13 +135,13 @@
                 </div>`).join('');
             document.getElementById('games-grid').innerHTML = gamesHTML;
 
-            // Total stats from your games only
+            // Total stats
             const totalPlaying = filteredGames.reduce((sum, g) => sum + (g.playing || 0), 0);
             const totalVisits = filteredGames.reduce((sum, g) => sum + (g.visits || 0), 0);
             document.getElementById('total-playing').innerText = totalPlaying;
             document.getElementById('total-visits').innerText = totalVisits;
 
-            // Render MY COMMUNITIES
+            // Render MY COMMUNITIES (using reliable thumbnail method)
             const groupsHTML = cfg.groups.map(g => `
                 <div class="glass rounded-3xl overflow-hidden flex flex-col group">
                     <div class="img-container">
@@ -156,11 +157,11 @@
 
         } catch (e) {
             console.error(e);
-            document.getElementById('games-grid').innerHTML = `<p class="text-red-400 text-center py-12">Could not load — refresh the page.</p>`;
+            document.getElementById('games-grid').innerHTML = `<p class="text-red-400 text-center py-12">Could not load games — please refresh the page.</p>`;
         }
     }
 
-    document.addEventListener('DOMContentLoaded', loadData);
+    document.addEventListener('DOMContentLoaded', load);
 </script>
 </body>
 </html>
