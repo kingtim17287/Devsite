@@ -249,6 +249,7 @@
                 "oPAXjJJtE6A",
             ]
         };
+
         // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -261,6 +262,37 @@
                 icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6h12v12"/>`;
             }
         }
+
+        // ✨ Smooth rising counter animation (starts at 0 and counts up with easing)
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+
+            const range = end - start;
+            let startTimestamp = null;
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                // Simple ease-out for that satisfying "rise" feel
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                
+                const value = Math.floor(easedProgress * range + start);
+                obj.innerText = value.toLocaleString();
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerText = end.toLocaleString();
+                }
+            };
+
+            // Replace the initial "—" instantly with 0 and begin animation
+            obj.innerText = '0';
+            window.requestAnimationFrame(step);
+        }
+
         async function loadPortfolio() {
             const cfg = portfolioConfig;
             // Set accent color dynamically
@@ -340,7 +372,7 @@
             }
             // 2. Load My Games
             await renderGameSection(cfg.manualGames, 'games-grid', false);
-            // Update global stats ONLY from My Games
+            // Update global stats ONLY from My Games — with cool rising animation
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
                     try {
@@ -354,8 +386,10 @@
                     const list = data.data || [];
                     const totalPlaying = list.reduce((sum, g) => sum + (g.playing || 0), 0);
                     const totalVisits = list.reduce((sum, g) => sum + (g.visits || 0), 0);
-                    document.getElementById('total-playing').innerText = totalPlaying.toLocaleString();
-                    document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
+                    
+                    // ✨ Trigger smooth rising animation
+                    animateValue('total-playing', 0, totalPlaying, 1600);
+                    animateValue('total-visits', 0, totalVisits, 2000);
                 }
             } catch (e) { console.warn("Stats update skipped", e); }
             // 3. Load Contributions
