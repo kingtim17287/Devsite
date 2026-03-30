@@ -17,7 +17,7 @@
             background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #030712 100%);
         }
         .heading-font { font-family: 'Syncopate', sans-serif; }
-       
+      
         /* Modern Glass Effect */
         .glass {
             background: rgba(255, 255, 255, 0.02);
@@ -26,14 +26,14 @@
             transition: all 0.3s ease;
         }
         .glass:hover { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-       
+      
         /* Animated Background Blobs */
         .blob {
             position: fixed; width: 500px; height: 500px;
             background: var(--accent); filter: blur(120px);
             opacity: 0.15; z-index: -1; border-radius: 50%;
         }
-       
+      
         /* Game Card - Enhanced with cool hover */
         .game-card {
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -41,22 +41,22 @@
         .game-card img { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
         .game-card:hover img { transform: scale(1.1) rotate(1deg); }
         .game-card:hover { transform: translateY(-4px); }
-       
-        .stat-value { 
-            text-shadow: 0 0 20px var(--accent-glow); 
-            line-height: 1; 
+      
+        .stat-value {
+            text-shadow: 0 0 20px var(--accent-glow);
+            line-height: 1;
         }
-       
+      
         @keyframes reveal { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .reveal { animation: reveal 0.8s ease forwards; }
-       
+      
         /* Image container for 16:9 thumbnails */
         .img-container { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: rgba(0,0,0,0.3); }
         .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .game-card:hover .img-container img { transform: scale(1.08); }
-       
+      
         .desc-truncate { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        
+       
         /* Badge for contributed games */
         .contrib-badge {
             position: absolute;
@@ -72,7 +72,6 @@
             box-shadow: 0 0 12px rgba(139, 92, 246, 0.5);
             z-index: 10;
         }
-
         /* Video card for Press */
         .video-card {
             transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -89,7 +88,6 @@
             transition: opacity 0.3s ease;
         }
         .video-card:hover .play-overlay { opacity: 1; }
-
         /* Mobile Menu */
         #mobile-menu {
             animation: slideDown 0.3s ease forwards;
@@ -104,13 +102,11 @@
     <!-- Animated Blobs -->
     <div class="blob" style="top: -10%; left: -10%;"></div>
     <div class="blob" style="bottom: -10%; right: -10%; background: #8b5cf6;"></div>
-
     <!-- Nav -->
     <nav class="fixed top-0 w-full z-50 py-4 px-6 glass border-b border-white/5">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <!-- Logo -->
             <span class="heading-font text-xl tracking-tighter italic" style="color: var(--accent);">KINGTIM17287</span>
-
             <!-- Desktop Menu -->
             <div id="desktop-menu" class="hidden md:flex gap-6 text-sm font-bold uppercase tracking-widest">
                 <a href="#games" class="hover:text-blue-400 transition">My Games</a>
@@ -119,7 +115,6 @@
                 <a href="#press" class="hover:text-blue-400 transition">Press</a>
                 <a href="#contact" class="hover:text-blue-400 transition">Contact</a>
             </div>
-
             <!-- Mobile Hamburger -->
             <button id="hamburger-btn" class="md:hidden text-3xl text-white focus:outline-none">
                 <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -127,7 +122,6 @@
                 </svg>
             </button>
         </div>
-
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 px-4 py-6 glass rounded-3xl mx-4">
             <div class="flex flex-col gap-4 text-sm font-bold uppercase tracking-widest text-center">
@@ -139,7 +133,6 @@
             </div>
         </div>
     </nav>
-
     <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
         <!-- Hero Section -->
         <div class="flex flex-col items-center text-center mb-24 reveal">
@@ -150,7 +143,6 @@
             <h1 class="heading-font text-5xl md:text-7xl mb-4 tracking-tighter">CREATING <span style="color: var(--accent);">EXPERIENCES</span></h1>
             <p class="text-gray-400 max-w-2xl text-lg">Lead Developer at Boden Interactive. Specializing in high-octane gameplay and immersive Roblox environments.</p>
         </div>
-
         <!-- Stats Bento Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 reveal" style="animation-delay: 0.2s;">
             <div class="glass p-8 rounded-3xl md:col-span-2 flex flex-col justify-center">
@@ -166,7 +158,6 @@
                 <p class="text-[10px] text-gray-500/70 mt-1">Stats only include My Games (not contributions)</p>
             </div>
         </div>
-
         <!-- My Games Section -->
         <section id="games" class="mb-24 reveal" style="animation-delay: 0.4s;">
             <div class="flex items-end justify-between mb-6">
@@ -178,7 +169,6 @@
                 <!-- Games populated by JS -->
             </div>
         </section>
-
         <!-- Contributions Section -->
         <section id="contributed" class="mb-24 reveal" style="animation-delay: 0.5s;">
             <div class="flex items-end justify-between mb-6">
@@ -190,7 +180,6 @@
                 <!-- Contributed games populated by JS -->
             </div>
         </section>
-
         <!-- Press Section -->
         <section id="press" class="mb-24 reveal" style="animation-delay: 0.6s;">
             <div class="flex items-end justify-between mb-6">
@@ -202,7 +191,6 @@
                 <!-- YouTube cards populated by JS -->
             </div>
         </section>
-
         <!-- Groups / Studios Section -->
         <section id="groups" class="mb-24 reveal" style="animation-delay: 0.7s;">
             <h2 class="heading-font text-3xl uppercase italic tracking-tighter mb-10">Studios</h2>
@@ -210,7 +198,6 @@
                 <!-- Groups populated by JS -->
             </div>
         </section>
-
         <!-- Contact Section -->
         <section id="contact" class="reveal" style="animation-delay: 0.8s;">
             <div class="flex items-end justify-between mb-6">
@@ -220,20 +207,26 @@
             <div class="glass rounded-3xl p-12 max-w-md mx-auto text-center">
                 <div class="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-4xl">💬</div>
                 <h3 class="text-2xl font-bold heading-font tracking-tighter mb-2">Let's Build Together</h3>
-                <p class="text-gray-400 mb-8">Hit me up on Discord — always open to collabs, feedback, or just chatting about Roblox dev!</p>
-                <a href="https://discord.com/users/1018621276165767299" target="_blank"
-                   class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-widest px-10 py-4 rounded-3xl transition text-lg">
-                    <span class="text-2xl">🔗</span>
-                    OPEN DISCORD PROFILE
-                </a>
+                <p class="text-gray-400 mb-8">Hit me up on Discord or Roblox — always open to collabs, feedback, or just chatting about Roblox dev!</p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://discord.com/users/1018621276165767299" target="_blank"
+                       class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-widest px-10 py-4 rounded-3xl transition text-lg w-full sm:w-auto">
+                        <span class="text-2xl">🔗</span>
+                        OPEN DISCORD
+                    </a>
+                    <a href="https://www.roblox.com/users/3808496324/profile" target="_blank"
+                       class="inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-widest px-10 py-4 rounded-3xl transition text-lg w-full sm:w-auto">
+                        <span class="text-2xl">🎮</span>
+                        OPEN ROBLOX
+                    </a>
+                </div>
             </div>
         </section>
     </main>
-
     <footer class="py-12 border-t border-white/5 text-center text-gray-600 text-sm">
         <p>© 2026 KINGTIM17287 • DESIGNED FOR THE METAVERSE</p>
     </footer>
-
     <script>
         const portfolioConfig = {
             userId: "3808496324",
@@ -256,26 +249,22 @@
                 "oPAXjJJtE6A",
             ]
         };
-
         // Mobile menu toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('hamburger-icon');
             menu.classList.toggle('hidden');
-            
+           
             if (menu.classList.contains('hidden')) {
                 icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>`;
             } else {
                 icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6h12v12"/>`;
             }
         }
-
         async function loadPortfolio() {
             const cfg = portfolioConfig;
-
             // Set accent color dynamically
             document.documentElement.style.setProperty('--accent', cfg.accentHex);
-
             // 1. Load Avatar
             try {
                 const avRes = await fetch(`https://thumbnails.rotunnel.com/v1/users/avatar-headshot?userIds=${cfg.userId}&size=420x420&format=Png&isCircular=false`);
@@ -284,7 +273,6 @@
                     document.getElementById('avatar-img').src = avData.data[0].imageUrl;
                 }
             } catch (e) { console.warn("Avatar load failed", e); }
-
             // Helper to fetch + render games
             async function renderGameSection(placeIds, gridElementId, isContributed = false) {
                 const grid = document.getElementById(gridElementId);
@@ -301,30 +289,24 @@
                     });
                     const resolvedUniverses = await Promise.all(universePromises);
                     const universeIds = resolvedUniverses.filter(id => id !== null);
-
                     if (universeIds.length === 0) {
                         grid.innerHTML = `<p class="col-span-full text-center text-white/50 py-12">No games found for this section.</p>`;
                         return;
                     }
-
                     const uniString = universeIds.join(',');
-
                     const detailsRes = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
                     const detailsData = await detailsRes.json();
                     let gamesList = detailsData.data || [];
-
                     gamesList.sort((a, b) => {
                         if (b.playing !== a.playing) return b.playing - a.playing;
                         return b.visits - a.visits;
                     });
-
                     const thumbRes = await fetch(`https://thumbnails.rotunnel.com/v1/games/icons?universeIds=${uniString}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
                     const thumbData = await thumbRes.json();
                     const thumbMap = {};
                     if (thumbData.data) {
                         thumbData.data.forEach(t => { thumbMap[t.targetId] = t.imageUrl; });
                     }
-
                     const gamesHTML = gamesList.map(g => {
                         const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
                         return `
@@ -350,17 +332,14 @@
                             </div>
                         </div>`;
                     }).join('');
-
                     grid.innerHTML = gamesHTML;
                 } catch (e) {
                     console.error(e);
                     grid.innerHTML = `<p class="col-span-full text-red-400 text-center py-12">Could not load games for this section.</p>`;
                 }
             }
-
             // 2. Load My Games
             await renderGameSection(cfg.manualGames, 'games-grid', false);
-
             // Update global stats ONLY from My Games
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
@@ -379,10 +358,8 @@
                     document.getElementById('total-visits').innerText = totalVisits.toLocaleString();
                 }
             } catch (e) { console.warn("Stats update skipped", e); }
-
             // 3. Load Contributions
             await renderGameSection(cfg.contributedGames, 'contributed-grid', true);
-
             // 4. Load Press Videos
             const pressGrid = document.getElementById('press-grid');
             const pressHTML = cfg.pressVideos.map(id => `
@@ -401,7 +378,6 @@
                 </a>
             `).join('');
             pressGrid.innerHTML = pressHTML;
-
             // 5. Load Groups (sorted by most members)
             const groupsGrid = document.getElementById('groups-grid');
             try {
@@ -412,7 +388,6 @@
                 if (groupThumbData.data) {
                     groupThumbData.data.forEach(t => { groupThumbMap[t.targetId] = t.imageUrl; });
                 }
-
                 const enrichedGroups = await Promise.all(cfg.groups.map(async (g) => {
                     try {
                         const res = await fetch(`https://groups.rotunnel.com/v1/groups/${g.id}`);
@@ -423,9 +398,7 @@
                     } catch (e) {}
                     return { ...g, memberCount: 0 };
                 }));
-
                 enrichedGroups.sort((a, b) => b.memberCount - a.memberCount);
-
                 const groupsHTML = enrichedGroups.map(g => `
                     <a href="${g.link}" target="_blank" class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full group">
                         <div class="img-container">
@@ -443,21 +416,19 @@
                         </div>
                     </a>
                 `).join('');
-
                 groupsGrid.innerHTML = groupsHTML;
             } catch (e) {
                 console.error(e);
                 groupsGrid.innerHTML = `<p class="col-span-full text-white/50 text-center py-12">Could not load groups.</p>`;
             }
         }
-
         // Initialize everything
         window.addEventListener('load', () => {
             // Force page to start at the very top
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-            
+           
             loadPortfolio();
-            
+           
             // Hamburger click handler
             document.getElementById('hamburger-btn').addEventListener('click', toggleMobileMenu);
         });
