@@ -3,88 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KingTim17287 | Roblox Developer</title>
-    <meta name="description" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense and more!">
-    <meta property="og:title" content="KingTim17287 | Roblox Developer">
-    <meta property="og:description" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense and more!">
-   
+    <title>KingTim17287 | Cyber Sovereign of Roblox</title>
+    <meta name="description" content="Forging legendary Roblox realms: Jetpack over LAVA • Dead Meals • 99 Nights Zombie Tower Defense • and worlds yet to be born.">
+    <meta property="og:title" content="KingTim17287 | Cyber Sovereign of Roblox">
+    <meta property="og:description" content="Forging legendary Roblox realms: Jetpack over LAVA • Dead Meals • 99 Nights Zombie Tower Defense • and worlds yet to be born.">
+  
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
-   
+  
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --accent: #00f0ff;
-            --accent-glow: rgba(0, 240, 255, 0.6);
+            --accent-glow: rgba(0, 240, 255, 0.7);
             --purple: #c026d3;
+            --royal-purple: #a020f0;
             --bg: #05080f;
         }
-       
+      
         body {
             background-color: var(--bg);
             color: #f8fafc;
             font-family: 'Space Grotesk', sans-serif;
-            background-image:
-                radial-gradient(circle at 30% 20%, #1e293b 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, #1e293b 0%, transparent 50%);
             overflow-x: hidden;
+            position: relative;
         }
-       
+      
+        /* === ORIGINAL CYBER-ROYALTY BACKGROUND === */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridMove 60s linear infinite;
+            z-index: -3;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 80px 80px; }
+        }
+        
+        /* Scanline overlay – pure cyber royalty */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 4px,
+                rgba(160, 32, 240, 0.07) 4px,
+                rgba(160, 32, 240, 0.07) 5px
+            );
+            pointer-events: none;
+            z-index: -1;
+            animation: scanline 8s linear infinite;
+            mix-blend-mode: screen;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+      
         .heading-font {
             font-family: 'Syncopate', sans-serif;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
         }
-       
+      
+        /* Ultra-premium neon with multiple layers */
         .neon-text {
             text-shadow:
                 0 0 8px var(--accent),
-                0 0 16px var(--accent);
+                0 0 16px var(--accent),
+                0 0 32px var(--accent-glow),
+                0 0 50px var(--royal-purple);
         }
-       
+      
+        /* Glassmorphism 2.0 – deeper, more reflective */
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 8px 32px -12px rgb(0 240 255);
+            background: rgba(255, 255, 255, 0.025);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 32px -12px rgb(0 240 255),
+                inset 0 1px 0 rgba(255,255,255,0.1);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
         }
         .glass:hover {
             border-color: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
-            transform: translateY(-3px);
+            box-shadow: 
+                0 0 40px var(--accent-glow),
+                0 0 60px rgba(192, 38, 211, 0.4);
+            transform: translateY(-4px) scale(1.02);
         }
-       
+      
+        /* Floating royal orbs */
         .blob {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            filter: blur(100px);
-            opacity: 0.09;
-            z-index: -1;
+            width: 680px;
+            height: 680px;
+            filter: blur(110px);
+            opacity: 0.11;
+            z-index: -2;
             border-radius: 50%;
-            animation: floatBlob 35s infinite ease-in-out;
+            animation: floatBlob 40s infinite ease-in-out;
         }
         @keyframes floatBlob {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(60px, -80px) rotate(90deg); }
-            50% { transform: translate(-40px, 60px) rotate(180deg); }
-            75% { transform: translate(80px, -40px) rotate(270deg); }
+            25% { transform: translate(90px, -110px) rotate(90deg); }
+            50% { transform: translate(-70px, 90px) rotate(180deg); }
+            75% { transform: translate(110px, -60px) rotate(270deg); }
         }
-       
+      
+        /* Particles canvas */
         #particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
+            z-index: -3;
             pointer-events: none;
-            opacity: 0.75;
+            opacity: 0.85;
         }
-       
+      
+        /* Glitch effect – the crown jewel */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 4s infinite linear alternate-reverse;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch::before {
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+            color: #00f0ff;
+            clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            transform: translate(-2px, -2px);
+        }
+        .glitch::after {
+            animation: glitch-anim2 3s infinite linear alternate-reverse;
+            color: #c026d3;
+            clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            transform: translate(2px, 2px);
+        }
+        @keyframes glitch-anim {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(3px, -3px); }
+            40% { transform: translate(3px, 3px); }
+            60% { transform: translate(-3px, -3px); }
+            80% { transform: translate(-3px, 3px); }
+            100% { transform: translate(0); }
+        }
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(5deg); }
+            20% { transform: skew(-5deg); }
+            100% { transform: skew(0deg); }
+        }
+      
         .game-card {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
             will-change: transform;
@@ -99,71 +199,77 @@
             background: linear-gradient(
                 120deg,
                 transparent,
-                rgba(255,255,255,0.25),
+                rgba(255,255,255,0.35),
                 transparent
             );
             transform: skewX(-25deg);
-            animation: holographicShine 6s linear infinite;
+            animation: holographicShine 5s linear infinite;
             opacity: 0;
             z-index: 2;
         }
         .game-card:hover::before {
-            animation-duration: 1.8s;
+            animation-duration: 1.4s;
             opacity: 1;
         }
         .game-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 0 35px var(--accent-glow);
+            transform: translateY(-12px) scale(1.04) rotate(1deg);
+            box-shadow: 0 0 50px var(--accent-glow);
         }
-       
+      
         .img-container {
             position: relative;
-            width: 100%;
             overflow: hidden;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
         }
-       
-        .square-img-container {
-            aspect-ratio: 1 / 1;
+      
+        /* Holographic avatar ring */
+        .avatar-ring {
+            animation: ringRotate 25s linear infinite;
         }
-       
-        .video-img-container {
-            aspect-ratio: 16 / 9;
+      
+        @keyframes ringRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-       
+      
         .stat-value {
-            text-shadow: 0 0 15px var(--accent-glow);
+            text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--royal-purple);
         }
-       
+      
         @keyframes reveal {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .reveal { animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-       
+      
         .contrib-badge {
             position: absolute;
-            top: 14px;
-            right: 14px;
-            background: linear-gradient(90deg, #c026d3, #a78bfa);
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(90deg, #c026d3, #00f0ff);
             color: white;
             font-size: 10px;
             font-weight: 900;
-            letter-spacing: 1.5px;
-            padding: 4px 14px;
+            letter-spacing: 2px;
+            padding: 4px 16px;
             border-radius: 9999px;
-            box-shadow: 0 0 15px rgba(192, 38, 211, 0.6);
+            box-shadow: 0 0 20px rgba(192, 38, 211, 0.8);
             z-index: 10;
+            text-transform: uppercase;
         }
-
-        /* Tighter description truncation for shorter cards */
+      
         .desc-truncate {
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-       
+      
+        /* Crown logo accent */
+        .crown-logo {
+            filter: drop-shadow(0 0 12px #00f0ff);
+        }
+      
         #perf-toggle {
             transition: all 0.3s ease;
         }
@@ -171,28 +277,37 @@
 </head>
 <body class="antialiased">
     <canvas id="particles"></canvas>
-   
-    <div class="blob" style="top: -15%; left: -20%; background: #00f0ff; animation-duration: 42s;"></div>
-    <div class="blob" style="bottom: -25%; right: -15%; background: #c026d3; animation-duration: 28s; animation-delay: -12s;"></div>
+  
+    <!-- Enhanced royal orbs -->
+    <div class="blob" style="top: -20%; left: -25%; background: #00f0ff; animation-duration: 45s;"></div>
+    <div class="blob" style="bottom: -30%; right: -20%; background: #c026d3; animation-duration: 32s; animation-delay: -15s;"></div>
+    <div class="blob" style="top: 40%; right: -30%; background: #a020f0; animation-duration: 50s; animation-delay: -8s; width: 420px; height: 420px;"></div>
+  
     <nav class="fixed top-0 w-full z-50 py-5 px-6 glass border-b border-white/10">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <span class="heading-font text-2xl tracking-[-3px] neon-text">KINGTIM17287</span>
-           
-            <div id="desktop-menu" class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-[2px]">
-                <a href="#games" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">MY GAMES</a>
-                <a href="#contributed" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">CONTRIBUTIONS</a>
-                <a href="#groups" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">STUDIOS</a>
-                <a href="#press" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">PRESS</a>
-                <a href="#contact" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">CONTACT</a>
+            <!-- Crown + Name -->
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="crown-logo w-8 h-8 text-[#00f0ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17l1.333-2.667M18 17l-1.333-2.667M6 17l-1.333 2.667M18 17l1.333 2.667M6 17h12M4 3h16" />
+                </svg>
+                <span class="heading-font text-3xl tracking-[-4px] neon-text glitch" data-text="KINGTIM17287">KINGTIM17287</span>
             </div>
-           
+          
+            <div id="desktop-menu" class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-[3px]">
+                <a href="#games" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_20px_#00f0ff]">MY REALMS</a>
+                <a href="#contributed" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_20px_#00f0ff]">LEGACY BUILDS</a>
+                <a href="#groups" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_20px_#00f0ff]">MY KINGDOMS</a>
+                <a href="#press" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_20px_#00f0ff]">MEDIA THRONE</a>
+                <a href="#contact" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_20px_#00f0ff]">SUMMON ME</a>
+            </div>
+          
             <div class="flex items-center gap-4">
                 <button id="perf-toggle" onclick="togglePerformance()"
-                        class="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-3xl border border-white/20 hover:border-[#00f0ff] transition">
+                        class="hidden md:flex items-center gap-2 px-5 py-2 text-xs font-bold uppercase tracking-widest rounded-3xl border border-white/20 hover:border-[#00f0ff] hover:shadow-[0_0_20px_#00f0ff] transition">
                     <span id="perf-status" class="text-emerald-400">●</span>
-                    SMOOTH MODE
+                    NEURAL MODE
                 </button>
-               
+              
                 <button id="hamburger-btn" class="md:hidden text-4xl text-white focus:outline-none hover:scale-110 transition">
                     <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -200,89 +315,106 @@
                 </button>
             </div>
         </div>
-       
+      
+        <!-- Mobile menu – now with royal flair -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 px-4 py-8 glass rounded-3xl mx-4 border border-white/20">
-            <div class="flex flex-col gap-6 text-sm font-bold uppercase tracking-[2px] text-center">
-                <a href="#games" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">MY GAMES</a>
-                <a href="#contributed" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">CONTRIBUTIONS</a>
-                <a href="#groups" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">STUDIOS</a>
-                <a href="#press" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">PRESS</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">CONTACT</a>
+            <div class="flex flex-col gap-6 text-sm font-bold uppercase tracking-[3px] text-center">
+                <a href="#games" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">MY REALMS</a>
+                <a href="#contributed" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">LEGACY BUILDS</a>
+                <a href="#groups" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">MY KINGDOMS</a>
+                <a href="#press" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">MEDIA THRONE</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">SUMMON ME</a>
             </div>
         </div>
     </nav>
+    
     <main class="pt-40 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
-        <!-- Hero – much better mobile scaling -->
+        <!-- HERO – now truly legendary -->
         <div class="flex flex-col items-center text-center mb-24 sm:mb-28 reveal">
             <div class="relative mb-8 sm:mb-10">
-                <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff] to-[#c026d3] rounded-full blur-3xl opacity-25 scale-110"></div>
-                <img id="avatar-img" class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-3xl border-4 border-white/10 p-2 object-cover bg-gray-900 shadow-2xl neon-text" src="" alt="Avatar">
+                <!-- Holographic rotating ring -->
+                <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff] via-[#c026d3] to-[#a020f0] rounded-[4rem] blur-3xl opacity-30 scale-125 avatar-ring"></div>
+                <div class="absolute inset-[-12px] border-4 border-transparent bg-gradient-to-br from-[#00f0ff] to-[#c026d3] rounded-[4rem] opacity-20 avatar-ring" style="animation-duration: 18s;"></div>
+                
+                <img id="avatar-img" class="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 rounded-3xl border-4 border-white/10 p-3 object-cover bg-gray-900 shadow-2xl neon-text" src="" alt="KingTim17287 Avatar">
             </div>
-           
-            <h1 class="heading-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-none mb-6 neon-text">
-                CREATING<br><span style="color: var(--accent);">LEGENDARY</span> EXPERIENCES
+          
+            <h1 class="heading-font text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-none mb-6 neon-text glitch" data-text="CREATING LEGENDARY">
+                CREATING<br><span style="color: var(--accent);">LEGENDARY</span><br>EXPERIENCES
             </h1>
-           
-            <p class="text-gray-400 max-w-xl text-lg sm:text-xl md:text-2xl font-light tracking-wide px-4">
-                Lead Developer at <span class="text-white font-medium">Boden Interactive</span>.<br>
-                High-octane gameplay • Immersive worlds
+          
+            <p class="text-gray-400 max-w-2xl text-xl sm:text-2xl md:text-3xl font-light tracking-[1px] px-4">
+                Cyber Sovereign • Lead Developer at <span class="text-white font-medium neon-text">Boden Interactive</span><br>
+                High-octane gameplay • Immersive realms • Unforgettable legends
             </p>
+            
+            <!-- Floating royal badge -->
+            <div class="mt-8 inline-flex items-center gap-3 px-6 py-3 glass rounded-3xl text-sm font-bold uppercase tracking-widest">
+                <span class="text-emerald-400">●</span>
+                CURRENTLY FORGING NEW WORLDS
+            </div>
         </div>
-        <!-- Stats -->
+        
+        <!-- Stats – more dramatic -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 sm:mb-28 reveal" style="animation-delay: 0.2s;">
             <div class="glass p-8 sm:p-10 rounded-3xl md:col-span-2 flex flex-col justify-center relative overflow-hidden">
-                <span class="uppercase text-xs tracking-[0.3em] text-[#00f0ff] font-bold mb-2">NETWORK REACH</span>
-                <div id="total-visits" class="stat-value text-5xl sm:text-6xl md:text-8xl font-bold heading-font tracking-tighter">—</div>
-                <p class="text-gray-400 mt-3 text-base sm:text-lg">Lifetime unique player visits across my titles</p>
+                <span class="uppercase text-xs tracking-[0.4em] text-[#00f0ff] font-bold mb-2">EMPIRE REACH</span>
+                <div id="total-visits" class="stat-value text-6xl sm:text-7xl md:text-8xl font-bold heading-font tracking-[-4px]">—</div>
+                <p class="text-gray-400 mt-4 text-lg">Lifetime souls who entered my realms</p>
             </div>
-            <div class="glass p-8 sm:p-10 rounded-3xl flex flex-col justify-center border border-emerald-400/30 relative overflow-hidden">
-                <span class="uppercase text-xs tracking-[0.3em] text-emerald-400 font-bold mb-2">LIVE NOW</span>
-                <div id="total-playing" class="stat-value text-5xl sm:text-6xl md:text-8xl font-bold heading-font tracking-tighter text-emerald-400">—</div>
-                <p class="text-gray-400 mt-3 text-base sm:text-lg">Players currently in my games</p>
+            <div class="glass p-8 sm:p-10 rounded-3xl flex flex-col justify-center border border-emerald-400/40 relative overflow-hidden">
+                <span class="uppercase text-xs tracking-[0.4em] text-emerald-400 font-bold mb-2">THRONE ROOM LIVE</span>
+                <div id="total-playing" class="stat-value text-6xl sm:text-7xl md:text-8xl font-bold heading-font tracking-[-4px] text-emerald-400">—</div>
+                <p class="text-gray-400 mt-4 text-lg">Warriors currently battling inside</p>
             </div>
         </div>
-        <!-- My Games – compact on mobile -->
+        
+        <!-- MY GAMES -->
         <section id="games" class="mb-24 sm:mb-28 reveal" style="animation-delay: 0.4s;">
             <div class="flex items-end justify-between mb-8">
-                <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">MY GAMES</h2>
-                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
+                <h2 class="heading-font text-5xl uppercase italic tracking-[-3px] neon-text">MY REALMS</h2>
+                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/30 to-transparent hidden md:block"></div>
             </div>
-            <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">I own and lead development on these titles</p>
+            <p class="text-gray-400 text-xl max-w-md -mt-3 mb-10">I own and command these digital kingdoms</p>
             <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
         </section>
-        <!-- Contributions – compact on mobile -->
+        
+        <!-- CONTRIBUTIONS -->
         <section id="contributed" class="mb-24 sm:mb-28 reveal" style="animation-delay: 0.5s;">
             <div class="flex items-end justify-between mb-8">
-                <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">CONTRIBUTIONS</h2>
-                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
+                <h2 class="heading-font text-5xl uppercase italic tracking-[-3px] neon-text">LEGACY BUILDS</h2>
+                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/30 to-transparent hidden md:block"></div>
             </div>
-            <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">Games where I helped bring the vision to life</p>
+            <p class="text-gray-400 text-xl max-w-md -mt-3 mb-10">Where I helped shape the vision of other creators</p>
             <div id="contributed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
         </section>
-        <!-- Press -->
+        
+        <!-- PRESS -->
         <section id="press" class="mb-24 sm:mb-28 reveal" style="animation-delay: 0.6s;">
             <div class="flex items-end justify-between mb-8">
-                <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">PRESS &amp; MEDIA</h2>
-                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
+                <h2 class="heading-font text-5xl uppercase italic tracking-[-3px] neon-text">MEDIA THRONE</h2>
+                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/30 to-transparent hidden md:block"></div>
             </div>
-            <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">Featured coverage and spotlight moments</p>
+            <p class="text-gray-400 text-xl max-w-md -mt-3 mb-10">Featured across the metaverse</p>
             <div id="press-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
         </section>
-        <!-- Studios -->
+        
+        <!-- STUDIOS -->
         <section id="groups" class="mb-24 sm:mb-28 reveal" style="animation-delay: 0.7s;">
-            <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text mb-12">STUDIOS I RUN WITH</h2>
+            <h2 class="heading-font text-5xl uppercase italic tracking-[-3px] neon-text mb-12">KINGDOMS I RULE WITH</h2>
             <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"></div>
         </section>
-        <!-- Contact -->
+        
+        <!-- CONTACT -->
         <section id="contact" class="reveal" style="animation-delay: 0.8s;">
             <div class="flex items-end justify-between mb-8">
-                <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">LET'S BUILD SOMETHING INSANE</h2>
-                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
+                <h2 class="heading-font text-5xl uppercase italic tracking-[-3px] neon-text">LET’S FORGE SOMETHING INSANE</h2>
+                <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/30 to-transparent hidden md:block"></div>
             </div>
-            <div class="glass rounded-3xl p-10 sm:p-14 max-w-lg mx-auto text-center border border-[#00f0ff]/20">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-[#00f0ff] to-[#c026d3] flex items-center justify-center text-5xl shadow-2xl neon-text">🚀</div>
-                <h3 class="text-3xl font-bold heading-font tracking-[-1px] mb-4">Ready to collab?</h3>
-                <p class="text-gray-400 text-lg mb-10">Discord • Roblox • Let's make something we love.</p>
+            <div class="glass rounded-3xl p-10 sm:p-14 max-w-lg mx-auto text-center border border-[#00f0ff]/30">
+                <div class="w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-[#00f0ff] to-[#c026d3] flex items-center justify-center text-6xl shadow-2xl neon-text">👑</div>
+                <h3 class="text-4xl font-bold heading-font tracking-[-2px] mb-4">Ready to enter the kingdom?</h3>
+                <p class="text-gray-400 text-xl mb-10">Discord • Roblox • Let’s build legends together.</p>
                 <div class="flex flex-col sm:flex-row gap-5 justify-center">
                     <a href="https://discord.com/users/1018621276165767299" target="_blank" class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">🔗 DISCORD</a>
                     <a href="https://www.roblox.com/users/3808496324/profile" target="_blank" class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">🎮 ROBLOX</a>
@@ -290,9 +422,14 @@
             </div>
         </section>
     </main>
-    <footer class="py-12 border-t border-white/10 text-center text-gray-500 text-xs tracking-widest">
-        <p>© 2026 KINGTIM17287 • BUILT FOR THE METAVERSE</p>
+    
+    <footer class="py-12 border-t border-white/10 text-center text-gray-500 text-xs tracking-widest flex flex-col items-center">
+        <p>© 2026 KINGTIM17287 • BUILT TO RULE THE METAVERSE</p>
+        <div class="mt-4 text-[10px] flex items-center gap-1">
+            <span class="text-[#00f0ff]">⚡</span> POWERED BY PURE NEON ENERGY
+        </div>
     </footer>
+    
     <script>
         const portfolioConfig = {
             userId: "3808496324",
@@ -301,33 +438,36 @@
             manualGames: [106988495261000, 77942507005261, 95744979554149, 104877476991790, 14044594226, 82126039807655, 101246660655753, 108311894104237],
             contributedGames: [107753480114427, 122606989565107],
             groups: [
-                { name: "Boden Interactive", desc: "Official Group - Join for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
-                { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
-                { name: "StarWoven Productions", desc: "Official Group - Join for updates & events!", id: "35252165", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
+                { name: "Boden Interactive", desc: "Official Group – Join the royal court for updates & events!", id: "426353491", link: "https://www.roblox.com/communities/426353491/Boden-Interactive#!/about" },
+                { name: "Woven Productions", desc: "Official Group – Join the royal court for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
+                { name: "StarWoven Productions", desc: "Official Group – Join the royal court for updates & events!", id: "35252165", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
             ],
             pressVideos: ["t-oIX_4KJL8","zIAhTM96-xg","Sutd2T5Map8","YYfX44s09Zc","XER43id1xZk","mn9EBUzGHrs","oPAXjJJtE6A"]
         };
+        
         let particlesEnabled = true;
         let cleanupParticleSystem = null;
+        
         function togglePerformance() {
             particlesEnabled = !particlesEnabled;
             const status = document.getElementById('perf-status');
             status.textContent = particlesEnabled ? '●' : '○';
             status.className = particlesEnabled ? 'text-emerald-400' : 'text-gray-400';
-           
+            
             if (cleanupParticleSystem) {
                 cleanupParticleSystem();
                 cleanupParticleSystem = null;
             }
-           
+            
             if (particlesEnabled) {
-                cleanupParticleSystem = createParticleBackground();
+                cleanupParticleSystem = createNeuralParticleBackground();
             } else {
                 const canvas = document.getElementById('particles');
                 const ctx = canvas.getContext('2d');
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
         }
+        
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('hamburger-icon');
@@ -338,6 +478,7 @@
                 icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6h12v12"/>`;
             }
         }
+        
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if (!obj) return;
@@ -355,73 +496,107 @@
             obj.innerText = '0';
             requestAnimationFrame(step);
         }
-        function createParticleBackground() {
+        
+        // === UPGRADED: Neural Network Particles (connects like a cyber brain) ===
+        function createNeuralParticleBackground() {
             const canvas = document.getElementById('particles');
             const ctx = canvas.getContext('2d');
             let particlesArray = [];
             let animationFrame;
+            
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3 + 0.8;
-                    this.speedX = Math.random() * 1.2 - 0.6;
-                    this.speedY = Math.random() * 1.2 - 0.6;
-                    this.hue = Math.random() * 30 + 190;
+                    this.size = Math.random() * 3.5 + 1;
+                    this.speedX = Math.random() * 1.4 - 0.7;
+                    this.speedY = Math.random() * 1.4 - 0.7;
+                    this.hue = Math.random() * 40 + 190;
                 }
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-                    if (this.size > 0.3) this.size -= 0.012;
+                    if (this.size > 0.4) this.size -= 0.008;
                 }
                 draw() {
-                    ctx.fillStyle = `hsl(${this.hue}, 100%, 78%)`;
-                    ctx.shadowBlur = 12;
-                    ctx.shadowColor = `hsl(${this.hue}, 100%, 78%)`;
+                    ctx.fillStyle = `hsl(${this.hue}, 100%, 82%)`;
+                    ctx.shadowBlur = 18;
+                    ctx.shadowColor = `hsl(${this.hue}, 100%, 82%)`;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
+            
             function resize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
-            function initParticles(count = 65) {
+            
+            function initParticles(count = 110) {
                 particlesArray = [];
                 for (let i = 0; i < count; i++) {
                     particlesArray.push(new Particle());
                 }
             }
+            
+            function connectParticles() {
+                for (let i = 0; i < particlesArray.length; i++) {
+                    for (let j = i + 1; j < particlesArray.length; j++) {
+                        const dx = particlesArray[i].x - particlesArray[j].x;
+                        const dy = particlesArray[i].y - particlesArray[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 130) {
+                            ctx.strokeStyle = `hsla(${particlesArray[i].hue}, 100%, 82%, ${1 - distance / 130})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.shadowBlur = 4;
+                            ctx.shadowColor = `hsl(${particlesArray[i].hue}, 100%, 82%)`;
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (let i = 0; i < particlesArray.length; i++) {
                     particlesArray[i].update();
                     particlesArray[i].draw();
-                    if (particlesArray[i].size <= 0.3) {
+                    if (particlesArray[i].size <= 0.4) {
                         particlesArray[i] = new Particle();
                     }
                 }
+                connectParticles();
                 animationFrame = requestAnimationFrame(animate);
             }
+            
             window.addEventListener('resize', () => {
                 resize();
                 initParticles();
             });
+            
             resize();
             initParticles();
             animate();
+            
             return () => cancelAnimationFrame(animationFrame);
         }
+        
         async function loadPortfolio() {
             const cfg = portfolioConfig;
             document.documentElement.style.setProperty('--accent', cfg.accentHex);
+            
             // Avatar
             try {
                 const avRes = await fetch(`https://thumbnails.rotunnel.com/v1/users/avatar-headshot?userIds=${cfg.userId}&size=420x420&format=Png&isCircular=false`);
                 const avData = await avRes.json();
                 if (avData.data?.length) document.getElementById('avatar-img').src = avData.data[0].imageUrl;
             } catch (e) {}
+            
             async function renderGameSection(placeIds, gridElementId, isContributed = false) {
                 const grid = document.getElementById(gridElementId);
                 try {
@@ -435,15 +610,18 @@
                     const resolved = await Promise.all(universePromises);
                     const universeIds = resolved.filter(Boolean);
                     if (!universeIds.length) return;
+                    
                     const uniString = universeIds.join(',');
                     const detailsRes = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
                     const detailsData = await detailsRes.json();
                     let gamesList = detailsData.data || [];
                     gamesList.sort((a, b) => (b.playing || 0) - (a.playing || 0) || (b.visits || 0) - (a.visits || 0));
+                    
                     const thumbRes = await fetch(`https://thumbnails.rotunnel.com/v1/games/icons?universeIds=${uniString}&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false`);
                     const thumbData = await thumbRes.json();
                     const thumbMap = {};
                     if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
+                    
                     const html = gamesList.map(g => {
                         const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
                         return `
@@ -463,7 +641,7 @@
                                     <div>Visits <span class="font-black text-[#00f0ff]">${(g.visits || 0).toLocaleString()}</span></div>
                                 </div>
                                 <a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank" class="mt-auto inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/30 text-white text-sm font-bold uppercase tracking-widest py-3 rounded-3xl transition-all">
-                                    PLAY NOW <span class="text-xl">→</span>
+                                    ENTER REALM <span class="text-xl">→</span>
                                 </a>
                             </div>
                         </div>`;
@@ -473,7 +651,9 @@
                     grid.innerHTML = `<p class="col-span-full text-center text-white/40 py-12">Could not load games.</p>`;
                 }
             }
+            
             await renderGameSection(cfg.manualGames, 'games-grid', false);
+            
             // Stats
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
@@ -482,7 +662,7 @@
                         return r.ok ? (await r.json()).universeId : null;
                     } catch { return null; }
                 }))).filter(Boolean).join(',');
-               
+                
                 if (uniString) {
                     const res = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
                     const data = await res.json();
@@ -493,7 +673,9 @@
                     animateValue('total-visits', 0, totalVisits, 2200);
                 }
             } catch (e) {}
+            
             await renderGameSection(cfg.contributedGames, 'contributed-grid', true);
+            
             // Press
             const pressGrid = document.getElementById('press-grid');
             pressGrid.innerHTML = cfg.pressVideos.map(id => `
@@ -511,6 +693,7 @@
                     </div>
                 </a>
             `).join('');
+            
             // Groups
             const groupsGrid = document.getElementById('groups-grid');
             try {
@@ -519,6 +702,7 @@
                 const thumbData = await thumbRes.json();
                 const thumbMap = {};
                 if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
+                
                 const enriched = await Promise.all(cfg.groups.map(async (g) => {
                     try {
                         const res = await fetch(`https://groups.rotunnel.com/v1/groups/${g.id}`);
@@ -530,6 +714,7 @@
                     return { ...g, memberCount: 0 };
                 }));
                 enriched.sort((a, b) => b.memberCount - a.memberCount);
+                
                 groupsGrid.innerHTML = enriched.map(g => `
                     <a href="${g.link}" target="_blank" class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full group">
                         <div class="img-container square-img-container">
@@ -542,24 +727,25 @@
                                 <div>MEMBERS <span class="font-black text-purple-400">${g.memberCount.toLocaleString()}</span></div>
                             </div>
                             <div class="mt-auto inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/30 text-white text-sm font-bold uppercase tracking-widest py-3 sm:py-4 rounded-3xl transition-all">
-                                JOIN THE CREW <span class="text-xl">→</span>
+                                JOIN THE COURT <span class="text-xl">→</span>
                             </div>
                         </div>
                     </a>
                 `).join('');
             } catch (e) {
-                groupsGrid.innerHTML = `<p class="col-span-full text-white/40 text-center py-12">Could not load studios.</p>`;
+                groupsGrid.innerHTML = `<p class="col-span-full text-white/40 text-center py-12">Could not load kingdoms.</p>`;
             }
         }
+        
         window.addEventListener('load', () => {
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-           
-            cleanupParticleSystem = createParticleBackground();
-           
+            
+            cleanupParticleSystem = createNeuralParticleBackground();
+            
             loadPortfolio();
-           
+            
             document.getElementById('hamburger-btn').addEventListener('click', toggleMobileMenu);
-           
+            
             if (window.innerWidth >= 768) {
                 document.getElementById('perf-toggle').classList.remove('hidden');
             }
