@@ -8,7 +8,7 @@
     <meta property="og:title" content="KingTim17287 | Roblox Developer">
     <meta property="og:description" content="My Roblox games: Jetpack over LAVA, Dead Meals, 99 Nights Zombie Tower Defense and more!">
     
-    <!-- Google Fonts for that premium futuristic look -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&amp;family=Syncopate:wght@400;700&amp;display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,48 +35,46 @@
             letter-spacing: -2px;
         }
         
-        /* EPIC Neon Text Glow */
         .neon-text {
             text-shadow: 
-                0 0 10px var(--accent),
-                0 0 20px var(--accent),
-                0 0 40px var(--accent),
-                0 0 80px var(--accent);
+                0 0 8px var(--accent),
+                0 0 16px var(--accent);
         }
         
-        /* Ultra Glassmorphism 2.0 */
+        /* LIGHTER Glassmorphism for performance */
         .glass {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(12px); /* was 20px - now much lighter */
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 0 8px 32px -12px rgb(0 240 255);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform; /* GPU hint */
         }
         .glass:hover { 
             border-color: var(--accent); 
-            box-shadow: 0 0 40px var(--accent-glow);
+            box-shadow: 0 0 30px var(--accent-glow);
             transform: translateY(-3px);
         }
         
-        /* Animated Floating Blobs - now with motion! */
+        /* Lighter Blobs (only 2, softer blur) */
         .blob {
             position: fixed;
             width: 600px;
             height: 600px;
-            filter: blur(140px);
-            opacity: 0.12;
+            filter: blur(100px); /* was 140px */
+            opacity: 0.09; /* was 0.12 */
             z-index: -1;
             border-radius: 50%;
             animation: floatBlob 35s infinite ease-in-out;
         }
         @keyframes floatBlob {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(80px, -100px) rotate(90deg); }
-            50% { transform: translate(-60px, 80px) rotate(180deg); }
-            75% { transform: translate(100px, -60px) rotate(270deg); }
+            25% { transform: translate(60px, -80px) rotate(90deg); }
+            50% { transform: translate(-40px, 60px) rotate(180deg); }
+            75% { transform: translate(80px, -40px) rotate(270deg); }
         }
         
-        /* Canvas Particle Background */
+        /* Canvas Particles - HEAVILY OPTIMIZED */
         #particles {
             position: fixed;
             top: 0;
@@ -88,11 +86,12 @@
             opacity: 0.75;
         }
         
-        /* Game Card - Holographic + Shine Effect */
+        /* Game Card - lighter shine */
         .game-card {
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
+            will-change: transform;
         }
         .game-card::before {
             content: '';
@@ -104,7 +103,7 @@
             background: linear-gradient(
                 120deg,
                 transparent,
-                rgba(255,255,255,0.35),
+                rgba(255,255,255,0.25),
                 transparent
             );
             transform: skewX(-25deg);
@@ -116,18 +115,11 @@
             animation-duration: 1.8s;
             opacity: 1;
         }
-        .game-card img { 
-            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); 
-        }
-        .game-card:hover img { 
-            transform: scale(1.12) rotate(2deg); 
-        }
         .game-card:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 0 50px var(--accent-glow);
+            box-shadow: 0 0 35px var(--accent-glow);
         }
         
-        /* Image container for 16:9 thumbnails */
         .img-container { 
             position: relative; 
             width: 100%; 
@@ -135,18 +127,9 @@
             overflow: hidden; 
             background: rgba(0,0,0,0.4);
         }
-        .img-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: transform 0.6s ease; 
-        }
         
         .stat-value {
-            text-shadow: 
-                0 0 20px var(--accent-glow),
-                0 0 40px var(--accent-glow);
-            line-height: 1;
+            text-shadow: 0 0 15px var(--accent-glow);
         }
         
         @keyframes reveal { 
@@ -155,7 +138,6 @@
         }
         .reveal { animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
         
-        /* Badge upgrade */
         .contrib-badge {
             position: absolute;
             top: 14px;
@@ -167,60 +149,29 @@
             letter-spacing: 1.5px;
             padding: 4px 14px;
             border-radius: 9999px;
-            box-shadow: 0 0 20px rgba(192, 38, 211, 0.7);
+            box-shadow: 0 0 15px rgba(192, 38, 211, 0.6);
             z-index: 10;
-            animation: badgePulse 2s infinite;
-        }
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
         }
         
-        /* Video card upgrade */
-        .video-card {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .video-card:hover { 
-            transform: scale(1.05) translateY(-6px); 
-        }
-        
-        /* Hero pulse ring */
-        .avatar-ring {
-            animation: pulseRing 4s infinite ease-in-out;
-        }
-        
-        /* Mobile Menu */
-        #mobile-menu {
-            animation: slideDown 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Scroll indicator */
-        .scroll-hint {
-            animation: bounce 2s infinite;
+        /* Performance toggle */
+        #perf-toggle {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
 <body class="antialiased">
-    <!-- Particle Canvas Background -->
+    <!-- Particle Canvas (now optimized) -->
     <canvas id="particles"></canvas>
     
-    <!-- Animated Blobs - 4 layers for depth -->
+    <!-- Only 2 lighter blobs -->
     <div class="blob" style="top: -15%; left: -20%; background: #00f0ff; animation-duration: 42s;"></div>
     <div class="blob" style="bottom: -25%; right: -15%; background: #c026d3; animation-duration: 28s; animation-delay: -12s;"></div>
-    <div class="blob" style="top: 30%; right: -25%; background: #00f0ff; width: 400px; height: 400px; animation-duration: 55s; animation-delay: -8s;"></div>
-    <div class="blob" style="bottom: 10%; left: -10%; background: #c026d3; width: 700px; height: 700px; animation-duration: 33s;"></div>
 
-    <!-- Nav - Even more futuristic -->
+    <!-- Nav -->
     <nav class="fixed top-0 w-full z-50 py-5 px-6 glass border-b border-white/10">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <!-- Logo -->
             <span class="heading-font text-2xl tracking-[-3px] neon-text">KINGTIM17287</span>
             
-            <!-- Desktop Menu -->
             <div id="desktop-menu" class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-[2px]">
                 <a href="#games" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">MY GAMES</a>
                 <a href="#contributed" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">CONTRIBUTIONS</a>
@@ -229,37 +180,39 @@
                 <a href="#contact" class="hover:text-[#00f0ff] transition-all hover:drop-shadow-[0_0_15px_#00f0ff]">CONTACT</a>
             </div>
             
-            <!-- Mobile Hamburger -->
-            <button id="hamburger-btn" class="md:hidden text-4xl text-white focus:outline-none hover:scale-110 transition">
-                <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+            <div class="flex items-center gap-4">
+                <!-- Performance Toggle -->
+                <button id="perf-toggle" onclick="togglePerformance()" 
+                        class="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-3xl border border-white/20 hover:border-[#00f0ff] transition">
+                    <span id="perf-status" class="text-emerald-400">●</span>
+                    SMOOTH MODE
+                </button>
+                
+                <button id="hamburger-btn" class="md:hidden text-4xl text-white focus:outline-none hover:scale-110 transition">
+                    <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" class="w-9 h-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
         </div>
         
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 px-4 py-8 glass rounded-3xl mx-4 border border-white/20">
             <div class="flex flex-col gap-6 text-sm font-bold uppercase tracking-[2px] text-center">
-                <a href="#games" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff] transition">MY GAMES</a>
-                <a href="#contributed" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff] transition">CONTRIBUTIONS</a>
-                <a href="#groups" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff] transition">STUDIOS</a>
-                <a href="#press" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff] transition">PRESS</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff] transition">CONTACT</a>
+                <a href="#games" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">MY GAMES</a>
+                <a href="#contributed" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">CONTRIBUTIONS</a>
+                <a href="#groups" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">STUDIOS</a>
+                <a href="#press" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">PRESS</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="py-4 hover:text-[#00f0ff]">CONTACT</a>
             </div>
         </div>
     </nav>
 
     <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <!-- Hero Section - NOW EPIC -->
+        <!-- Hero -->
         <div class="flex flex-col items-center text-center mb-28 reveal">
             <div class="relative mb-10">
-                <!-- Multiple pulsing rings -->
-                <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff] to-[#c026d3] rounded-full blur-3xl opacity-30 scale-110 avatar-ring"></div>
-                <div class="absolute inset-[-12px] border border-[#00f0ff]/40 rounded-full animate-[ping_3s_infinite]"></div>
-                
-                <img id="avatar-img" 
-                     class="relative w-56 h-56 md:w-64 md:h-64 rounded-3xl border-4 border-white/10 p-2 object-cover bg-gray-900 shadow-2xl neon-text"
-                     src="" alt="Avatar">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff] to-[#c026d3] rounded-full blur-3xl opacity-25 scale-110"></div>
+                <img id="avatar-img" class="relative w-56 h-56 md:w-64 md:h-64 rounded-3xl border-4 border-white/10 p-2 object-cover bg-gray-900 shadow-2xl neon-text" src="" alt="Avatar">
             </div>
             
             <h1 class="heading-font text-6xl md:text-8xl leading-none mb-6 neon-text">
@@ -270,79 +223,55 @@
                 Lead Developer at <span class="text-white font-medium">Boden Interactive</span>.<br>
                 High-octane gameplay • Immersive worlds • Roblox legend in the making.
             </p>
-            
-            <!-- Scroll hint -->
-            <div class="mt-12 flex flex-col items-center gap-2 text-[#00f0ff] scroll-hint">
-                <div class="text-xs tracking-[3px] font-bold">SCROLL FOR THE SHOW</div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-9-9m0 0L5 5" />
-                </svg>
-            </div>
         </div>
 
-        <!-- Stats Bento Grid - More futuristic -->
+        <!-- Stats -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-28 reveal" style="animation-delay: 0.2s;">
             <div class="glass p-10 rounded-3xl md:col-span-2 flex flex-col justify-center relative overflow-hidden">
-                <div class="absolute top-6 right-6 text-[120px] font-black heading-font text-white/5 select-none">VISITS</div>
                 <span class="uppercase text-xs tracking-[0.3em] text-[#00f0ff] font-bold mb-2">NETWORK REACH</span>
                 <div id="total-visits" class="stat-value text-5xl sm:text-6xl md:text-8xl font-bold heading-font tracking-tighter">—</div>
                 <p class="text-gray-400 mt-3 text-lg">Lifetime unique player visits across all titles</p>
-                <p class="text-xs text-gray-500/70 mt-1">My Games only • Live data from Roblox</p>
             </div>
             <div class="glass p-10 rounded-3xl flex flex-col justify-center border border-emerald-400/30 relative overflow-hidden">
-                <div class="absolute top-6 right-6 text-[120px] font-black heading-font text-emerald-400/10 select-none">LIVE</div>
                 <span class="uppercase text-xs tracking-[0.3em] text-emerald-400 font-bold mb-2">LIVE NOW</span>
                 <div id="total-playing" class="stat-value text-5xl sm:text-6xl md:text-8xl font-bold heading-font tracking-tighter text-emerald-400">—</div>
                 <p class="text-gray-400 mt-3 text-lg">Players currently in my games</p>
-                <p class="text-xs text-gray-500/70 mt-1">Real-time • Updates instantly</p>
             </div>
         </div>
 
-        <!-- My Games Section -->
+        <!-- Sections (unchanged but with lighter cards) -->
         <section id="games" class="mb-28 reveal" style="animation-delay: 0.4s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">MY GAMES</h2>
                 <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
             </div>
             <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">I own and lead development on these titles</p>
-            <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Populated by JS -->
-            </div>
+            <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
-        <!-- Contributions Section -->
         <section id="contributed" class="mb-28 reveal" style="animation-delay: 0.5s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">CONTRIBUTIONS</h2>
                 <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
             </div>
             <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">Games where I helped bring the vision to life</p>
-            <div id="contributed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Populated by JS -->
-            </div>
+            <div id="contributed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
-        <!-- Press Section -->
         <section id="press" class="mb-28 reveal" style="animation-delay: 0.6s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">PRESS &amp; MEDIA</h2>
                 <div class="h-px flex-grow mx-8 bg-gradient-to-r from-transparent via-white/20 to-transparent hidden md:block"></div>
             </div>
             <p class="text-gray-400 text-lg max-w-md -mt-3 mb-10">Featured coverage and spotlight moments</p>
-            <div id="press-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Populated by JS -->
-            </div>
+            <div id="press-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
-        <!-- Groups / Studios Section -->
         <section id="groups" class="mb-28 reveal" style="animation-delay: 0.7s;">
             <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text mb-12">STUDIOS I RUN WITH</h2>
-            <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Populated by JS -->
-            </div>
+            <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="reveal" style="animation-delay: 0.8s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">LET'S BUILD SOMETHING INSANE</h2>
@@ -352,25 +281,16 @@
                 <div class="w-24 h-24 mx-auto mb-8 rounded-3xl bg-gradient-to-br from-[#00f0ff] to-[#c026d3] flex items-center justify-center text-5xl shadow-2xl neon-text">🚀</div>
                 <h3 class="text-3xl font-bold heading-font tracking-[-1px] mb-4">Ready to collab?</h3>
                 <p class="text-gray-400 text-lg mb-10">Discord • Roblox • Let's make the next viral hit together.</p>
-                
                 <div class="flex flex-col sm:flex-row gap-5 justify-center">
-                    <a href="https://discord.com/users/1018621276165767299" target="_blank"
-                       class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">
-                        <span class="text-3xl group-hover:rotate-12 transition">🔗</span>
-                        DISCORD
-                    </a>
-                    <a href="https://www.roblox.com/users/3808496324/profile" target="_blank"
-                       class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">
-                        <span class="text-3xl group-hover:rotate-12 transition">🎮</span>
-                        ROBLOX
-                    </a>
+                    <a href="https://discord.com/users/1018621276165767299" target="_blank" class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">🔗 DISCORD</a>
+                    <a href="https://www.roblox.com/users/3808496324/profile" target="_blank" class="group inline-flex items-center justify-center gap-4 bg-white/10 hover:bg-[#00f0ff] hover:text-black font-bold uppercase tracking-widest px-10 py-6 rounded-3xl transition-all text-lg">🎮 ROBLOX</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="py-12 border-t border-white/10 text-center text-gray-500 text-xs tracking-widest">
-        <p>© 2026 KINGTIM17287 • BUILT FOR THE METAVERSE • POWERED BY PURE VIBES</p>
+        <p>© 2026 KINGTIM17287 • BUILT FOR THE METAVERSE • NOW BUTTERY SMOOTH</p>
     </footer>
 
     <script>
@@ -385,12 +305,32 @@
                 { name: "Woven Productions", desc: "Official Group - Join for updates & events!", id: "7457551", link: "https://www.roblox.com/communities/7457551/Woven-Productions#!/about" },
                 { name: "StarWoven Productions", desc: "Official Group - Join for updates & events!", id: "35252165", link: "https://www.roblox.com/communities/35252165/StarWoven-Productions#!/about" }
             ],
-            pressVideos: [
-                "t-oIX_4KJL8", "zIAhTM96-xg", "Sutd2T5Map8", "YYfX44s09Zc", "XER43id1xZk", "mn9EBUzGHrs", "oPAXjJJtE6A"
-            ]
+            pressVideos: ["t-oIX_4KJL8","zIAhTM96-xg","Sutd2T5Map8","YYfX44s09Zc","XER43id1xZk","mn9EBUzGHrs","oPAXjJJtE6A"]
         };
 
-        // Mobile menu toggle
+        let particlesEnabled = true;
+        let cleanupParticleSystem = null;
+
+        function togglePerformance() {
+            particlesEnabled = !particlesEnabled;
+            const status = document.getElementById('perf-status');
+            status.textContent = particlesEnabled ? '●' : '○';
+            status.className = particlesEnabled ? 'text-emerald-400' : 'text-gray-400';
+            
+            if (cleanupParticleSystem) {
+                cleanupParticleSystem();
+                cleanupParticleSystem = null;
+            }
+            
+            if (particlesEnabled) {
+                cleanupParticleSystem = createParticleBackground();
+            } else {
+                const canvas = document.getElementById('particles');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('hamburger-icon');
@@ -402,7 +342,6 @@
             }
         }
 
-        // Smooth rising counter
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if (!obj) return;
@@ -414,17 +353,14 @@
                 const easedProgress = 1 - Math.pow(1 - progress, 3);
                 const value = Math.floor(easedProgress * range + start);
                 obj.innerText = value.toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                } else {
-                    obj.innerText = end.toLocaleString();
-                }
+                if (progress < 1) requestAnimationFrame(step);
+                else obj.innerText = end.toLocaleString();
             };
             obj.innerText = '0';
-            window.requestAnimationFrame(step);
+            requestAnimationFrame(step);
         }
 
-        // NEON PARTICLE BACKGROUND SYSTEM
+        // OPTIMIZED Particle System (65 particles, NO connections = zero lag)
         function createParticleBackground() {
             const canvas = document.getElementById('particles');
             const ctx = canvas.getContext('2d');
@@ -435,20 +371,20 @@
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 3.5 + 0.8;
+                    this.size = Math.random() * 3 + 0.8;
                     this.speedX = Math.random() * 1.2 - 0.6;
                     this.speedY = Math.random() * 1.2 - 0.6;
-                    this.hue = Math.random() * 30 + 190; // cyan-blue range
+                    this.hue = Math.random() * 30 + 190;
                 }
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-                    if (this.size > 0.3) this.size -= 0.015;
+                    if (this.size > 0.3) this.size -= 0.012;
                 }
                 draw() {
-                    ctx.fillStyle = `hsl(${this.hue}, 100%, 75%)`;
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = `hsl(${this.hue}, 100%, 75%)`;
+                    ctx.fillStyle = `hsl(${this.hue}, 100%, 78%)`;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = `hsl(${this.hue}, 100%, 78%)`;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -460,30 +396,10 @@
                 canvas.height = window.innerHeight;
             }
 
-            function initParticles(count = 180) {
+            function initParticles(count = 65) { // heavily reduced
                 particlesArray = [];
                 for (let i = 0; i < count; i++) {
                     particlesArray.push(new Particle());
-                }
-            }
-
-            function connectParticles() {
-                for (let a = 0; a < particlesArray.length; a++) {
-                    for (let b = a + 1; b < particlesArray.length; b++) {
-                        const dx = particlesArray[a].x - particlesArray[b].x;
-                        const dy = particlesArray[a].y - particlesArray[b].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < 130) {
-                            ctx.strokeStyle = `rgba(0, 240, 255, ${1 - distance / 130})`;
-                            ctx.lineWidth = 0.6;
-                            ctx.shadowBlur = 8;
-                            ctx.shadowColor = '#00f0ff';
-                            ctx.beginPath();
-                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                            ctx.stroke();
-                        }
-                    }
                 }
             }
 
@@ -496,7 +412,6 @@
                         particlesArray[i] = new Particle();
                     }
                 }
-                connectParticles();
                 animationFrame = requestAnimationFrame(animate);
             }
 
@@ -509,27 +424,20 @@
             initParticles();
             animate();
 
-            // Cleanup on page unload
             return () => cancelAnimationFrame(animationFrame);
         }
 
-        // Main load function (same powerful data fetching, now with cooler visuals)
         async function loadPortfolio() {
             const cfg = portfolioConfig;
-            
-            // Dynamic accent
             document.documentElement.style.setProperty('--accent', cfg.accentHex);
 
-            // Load avatar
+            // Avatar
             try {
                 const avRes = await fetch(`https://thumbnails.rotunnel.com/v1/users/avatar-headshot?userIds=${cfg.userId}&size=420x420&format=Png&isCircular=false`);
                 const avData = await avRes.json();
-                if (avData.data && avData.data.length > 0) {
-                    document.getElementById('avatar-img').src = avData.data[0].imageUrl;
-                }
-            } catch (e) { console.warn("Avatar load failed", e); }
+                if (avData.data?.length) document.getElementById('avatar-img').src = avData.data[0].imageUrl;
+            } catch (e) {}
 
-            // Render games helper
             async function renderGameSection(placeIds, gridElementId, isContributed = false) {
                 const grid = document.getElementById(gridElementId);
                 try {
@@ -537,15 +445,12 @@
                         try {
                             const res = await fetch(`https://apis.rotunnel.com/universes/v1/places/${placeId}/universe`);
                             if (res.ok) return (await res.json()).universeId;
-                        } catch (e) {}
+                        } catch {}
                         return null;
                     });
-                    const resolvedUniverses = await Promise.all(universePromises);
-                    const universeIds = resolvedUniverses.filter(Boolean);
-                    if (!universeIds.length) {
-                        grid.innerHTML = `<p class="col-span-full text-center text-white/40 py-12 text-xl">No games yet...</p>`;
-                        return;
-                    }
+                    const resolved = await Promise.all(universePromises);
+                    const universeIds = resolved.filter(Boolean);
+                    if (!universeIds.length) return;
 
                     const uniString = universeIds.join(',');
                     const detailsRes = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
@@ -558,7 +463,7 @@
                     const thumbMap = {};
                     if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
 
-                    const gamesHTML = gamesList.map(g => {
+                    const html = gamesList.map(g => {
                         const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
                         return `
                         <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full relative">
@@ -576,24 +481,21 @@
                                     </div>
                                     <div>Visits <span class="font-black text-[#00f0ff]">${(g.visits || 0).toLocaleString()}</span></div>
                                 </div>
-                                <a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank"
-                                   class="mt-auto inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/30 text-white text-sm font-bold uppercase tracking-widest py-4 rounded-3xl transition-all">
+                                <a href="https://www.roblox.com/games/${g.rootPlaceId}" target="_blank" class="mt-auto inline-flex items-center justify-center gap-3 bg-white/10 hover:bg-white/30 text-white text-sm font-bold uppercase tracking-widest py-4 rounded-3xl transition-all">
                                     PLAY NOW <span class="text-xl">→</span>
                                 </a>
                             </div>
                         </div>`;
                     }).join('');
-                    grid.innerHTML = gamesHTML;
+                    grid.innerHTML = html;
                 } catch (e) {
-                    console.error(e);
-                    grid.innerHTML = `<p class="col-span-full text-center text-red-400 py-12">Failed to load games.</p>`;
+                    grid.innerHTML = `<p class="col-span-full text-center text-white/40 py-12">Could not load games.</p>`;
                 }
             }
 
-            // Load My Games + Stats
             await renderGameSection(cfg.manualGames, 'games-grid', false);
-            
-            // Global stats (My Games only)
+
+            // Stats
             try {
                 const uniString = (await Promise.all(cfg.manualGames.map(async p => {
                     try {
@@ -603,23 +505,21 @@
                 }))).filter(Boolean).join(',');
                 
                 if (uniString) {
-                    const detailsRes = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
-                    const data = await detailsRes.json();
+                    const res = await fetch(`https://games.rotunnel.com/v1/games?universeIds=${uniString}`);
+                    const data = await res.json();
                     const list = data.data || [];
                     const totalPlaying = list.reduce((sum, g) => sum + (g.playing || 0), 0);
                     const totalVisits = list.reduce((sum, g) => sum + (g.visits || 0), 0);
-                    
                     animateValue('total-playing', 0, totalPlaying, 1700);
                     animateValue('total-visits', 0, totalVisits, 2200);
                 }
-            } catch (e) { console.warn("Stats skipped", e); }
+            } catch (e) {}
 
-            // Contributions
             await renderGameSection(cfg.contributedGames, 'contributed-grid', true);
 
-            // Press Videos
+            // Press
             const pressGrid = document.getElementById('press-grid');
-            const pressHTML = cfg.pressVideos.map(id => `
+            pressGrid.innerHTML = cfg.pressVideos.map(id => `
                 <a href="https://www.youtube.com/watch?v=${id}" target="_blank" class="video-card glass rounded-3xl overflow-hidden flex flex-col h-full relative group">
                     <div class="img-container">
                         <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="YouTube Video" class="w-full h-full object-cover">
@@ -634,33 +534,32 @@
                     </div>
                 </a>
             `).join('');
-            pressGrid.innerHTML = pressHTML;
 
-            // Studios
+            // Groups
             const groupsGrid = document.getElementById('groups-grid');
             try {
                 const groupIds = cfg.groups.map(g => g.id).join(',');
-                const groupThumbRes = await fetch(`https://thumbnails.rotunnel.com/v1/groups/icons?groupIds=${groupIds}&size=420x420&format=Png`);
-                const groupThumbData = await groupThumbRes.json();
-                const groupThumbMap = {};
-                if (groupThumbData.data) groupThumbData.data.forEach(t => groupThumbMap[t.targetId] = t.imageUrl);
+                const thumbRes = await fetch(`https://thumbnails.rotunnel.com/v1/groups/icons?groupIds=${groupIds}&size=420x420&format=Png`);
+                const thumbData = await thumbRes.json();
+                const thumbMap = {};
+                if (thumbData.data) thumbData.data.forEach(t => thumbMap[t.targetId] = t.imageUrl);
 
-                const enrichedGroups = await Promise.all(cfg.groups.map(async (g) => {
+                const enriched = await Promise.all(cfg.groups.map(async (g) => {
                     try {
                         const res = await fetch(`https://groups.rotunnel.com/v1/groups/${g.id}`);
                         if (res.ok) {
                             const data = await res.json();
                             return { ...g, memberCount: data.memberCount || 0 };
                         }
-                    } catch (e) {}
+                    } catch {}
                     return { ...g, memberCount: 0 };
                 }));
-                enrichedGroups.sort((a, b) => b.memberCount - a.memberCount);
+                enriched.sort((a, b) => b.memberCount - a.memberCount);
 
-                const groupsHTML = enrichedGroups.map(g => `
+                groupsGrid.innerHTML = enriched.map(g => `
                     <a href="${g.link}" target="_blank" class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full group">
                         <div class="img-container">
-                            <img src="${groupThumbMap[g.id] || ''}" alt="${g.name}">
+                            <img src="${thumbMap[g.id] || ''}" alt="${g.name}">
                         </div>
                         <div class="p-7 flex flex-col flex-1">
                             <h3 class="text-2xl font-bold heading-font tracking-[-1px] mb-4">${g.name}</h3>
@@ -674,26 +573,25 @@
                         </div>
                     </a>
                 `).join('');
-                groupsGrid.innerHTML = groupsHTML;
             } catch (e) {
                 groupsGrid.innerHTML = `<p class="col-span-full text-white/40 text-center py-12">Could not load studios.</p>`;
             }
         }
 
-        // Launch everything
         window.addEventListener('load', () => {
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             
-            // Start the neon particle universe
-            createParticleBackground();
+            // Start particles
+            cleanupParticleSystem = createParticleBackground();
             
-            // Load all the Roblox data
             loadPortfolio();
             
-            // Hamburger
             document.getElementById('hamburger-btn').addEventListener('click', toggleMobileMenu);
             
-            console.log('%c🚀 KingTim17287 Portfolio v2.0 – MAXIMUM COOLNESS ACHIEVED', 'color:#00f0ff; font-family:monospace; font-size:13px');
+            // Show performance toggle on desktop
+            if (window.innerWidth >= 768) {
+                document.getElementById('perf-toggle').classList.remove('hidden');
+            }
         });
     </script>
 </body>
