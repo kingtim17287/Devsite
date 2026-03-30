@@ -137,7 +137,6 @@
         </div>
     </nav>
 
-    <!-- The rest of your page is unchanged (hero, sections, etc.) -->
     <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
         <!-- Hero Section -->
         <div class="flex flex-col items-center text-center mb-24 reveal">
@@ -153,13 +152,13 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 reveal" style="animation-delay: 0.2s;">
             <div class="glass p-8 rounded-3xl md:col-span-2 flex flex-col justify-center">
                 <span class="uppercase text-xs tracking-[0.3em] text-blue-400 font-bold mb-2">Network Reach</span>
-                <div id="total-visits" class="stat-value text-7xl font-bold heading-font">0</div>
+                <div id="total-visits" class="stat-value text-5xl md:text-7xl font-bold heading-font tracking-tighter">0</div>
                 <p class="text-gray-500 mt-2 italic text-sm">Lifetime unique player visits across all titles</p>
                 <p class="text-[10px] text-gray-500/70 mt-1">Stats only include My Games (not contributions)</p>
             </div>
             <div class="glass p-8 rounded-3xl flex flex-col justify-center border-emerald-500/20">
                 <span class="uppercase text-xs tracking-[0.3em] text-emerald-400 font-bold mb-2">Live Now</span>
-                <div id="total-playing" class="stat-value text-7xl font-bold heading-font text-emerald-400">0</div>
+                <div id="total-playing" class="stat-value text-5xl md:text-7xl font-bold heading-font tracking-tighter text-emerald-400">0</div>
                 <p class="text-gray-500 mt-2 italic text-sm">Concurrent players online</p>
                 <p class="text-[10px] text-gray-500/70 mt-1">Stats only include My Games (not contributions)</p>
             </div>
@@ -261,7 +260,6 @@
             const icon = document.getElementById('hamburger-icon');
             menu.classList.toggle('hidden');
             
-            // Switch between hamburger and X
             if (menu.classList.contains('hidden')) {
                 icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>`;
             } else {
