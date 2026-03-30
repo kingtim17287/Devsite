@@ -41,14 +41,13 @@
                 0 0 16px var(--accent);
         }
         
-        /* LIGHTER Glassmorphism for performance */
         .glass {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px); /* was 20px - now much lighter */
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.12);
             box-shadow: 0 8px 32px -12px rgb(0 240 255);
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform; /* GPU hint */
+            will-change: transform;
         }
         .glass:hover { 
             border-color: var(--accent); 
@@ -56,13 +55,12 @@
             transform: translateY(-3px);
         }
         
-        /* Lighter Blobs (only 2, softer blur) */
         .blob {
             position: fixed;
             width: 600px;
             height: 600px;
-            filter: blur(100px); /* was 140px */
-            opacity: 0.09; /* was 0.12 */
+            filter: blur(100px);
+            opacity: 0.09;
             z-index: -1;
             border-radius: 50%;
             animation: floatBlob 35s infinite ease-in-out;
@@ -74,7 +72,6 @@
             75% { transform: translate(80px, -40px) rotate(270deg); }
         }
         
-        /* Canvas Particles - HEAVILY OPTIMIZED */
         #particles {
             position: fixed;
             top: 0;
@@ -86,7 +83,6 @@
             opacity: 0.75;
         }
         
-        /* Game Card - lighter shine */
         .game-card {
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
@@ -120,12 +116,20 @@
             box-shadow: 0 0 35px var(--accent-glow);
         }
         
+        /* RECTANGULAR thumbnails for games (16:9) – perfect for thumbnails */
         .img-container { 
             position: relative; 
             width: 100%; 
-            aspect-ratio: 16/9; 
             overflow: hidden; 
             background: rgba(0,0,0,0.4);
+        }
+        .game-img-container {
+            aspect-ratio: 16 / 9;
+        }
+        
+        /* SQUARE icons for studios – group logos fit perfectly now */
+        .studio-img-container {
+            aspect-ratio: 1 / 1;
         }
         
         .stat-value {
@@ -153,21 +157,17 @@
             z-index: 10;
         }
         
-        /* Performance toggle */
         #perf-toggle {
             transition: all 0.3s ease;
         }
     </style>
 </head>
 <body class="antialiased">
-    <!-- Particle Canvas (now optimized) -->
     <canvas id="particles"></canvas>
     
-    <!-- Only 2 lighter blobs -->
     <div class="blob" style="top: -15%; left: -20%; background: #00f0ff; animation-duration: 42s;"></div>
     <div class="blob" style="bottom: -25%; right: -15%; background: #c026d3; animation-duration: 28s; animation-delay: -12s;"></div>
 
-    <!-- Nav -->
     <nav class="fixed top-0 w-full z-50 py-5 px-6 glass border-b border-white/10">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <span class="heading-font text-2xl tracking-[-3px] neon-text">KINGTIM17287</span>
@@ -181,7 +181,6 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <!-- Performance Toggle -->
                 <button id="perf-toggle" onclick="togglePerformance()" 
                         class="hidden md:flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-3xl border border-white/20 hover:border-[#00f0ff] transition">
                     <span id="perf-status" class="text-emerald-400">●</span>
@@ -208,20 +207,20 @@
     </nav>
 
     <main class="pt-40 pb-20 px-6 max-w-7xl mx-auto">
-        <!-- Hero -->
+        <!-- Hero – now scales perfectly on mobile -->
         <div class="flex flex-col items-center text-center mb-28 reveal">
             <div class="relative mb-10">
                 <div class="absolute inset-0 bg-gradient-to-br from-[#00f0ff] to-[#c026d3] rounded-full blur-3xl opacity-25 scale-110"></div>
                 <img id="avatar-img" class="relative w-56 h-56 md:w-64 md:h-64 rounded-3xl border-4 border-white/10 p-2 object-cover bg-gray-900 shadow-2xl neon-text" src="" alt="Avatar">
             </div>
             
-            <h1 class="heading-font text-6xl md:text-8xl leading-none mb-6 neon-text">
+            <h1 class="heading-font text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-none mb-6 neon-text">
                 CREATING<br><span style="color: var(--accent);">LEGENDARY</span> EXPERIENCES
             </h1>
             
             <p class="text-gray-400 max-w-xl text-xl md:text-2xl font-light tracking-wide">
                 Lead Developer at <span class="text-white font-medium">Boden Interactive</span>.<br>
-                High-octane gameplay • Immersive worlds • Roblox legend in the making.
+                High-octane gameplay • Immersive worlds
             </p>
         </div>
 
@@ -239,7 +238,7 @@
             </div>
         </div>
 
-        <!-- Sections (unchanged but with lighter cards) -->
+        <!-- My Games – rectangular thumbnails -->
         <section id="games" class="mb-28 reveal" style="animation-delay: 0.4s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">MY GAMES</h2>
@@ -249,6 +248,7 @@
             <div id="games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
+        <!-- Contributions -->
         <section id="contributed" class="mb-28 reveal" style="animation-delay: 0.5s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">CONTRIBUTIONS</h2>
@@ -258,6 +258,7 @@
             <div id="contributed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
+        <!-- Press -->
         <section id="press" class="mb-28 reveal" style="animation-delay: 0.6s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">PRESS &amp; MEDIA</h2>
@@ -267,11 +268,13 @@
             <div id="press-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </section>
 
+        <!-- Studios – square icons -->
         <section id="groups" class="mb-28 reveal" style="animation-delay: 0.7s;">
             <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text mb-12">STUDIOS I RUN WITH</h2>
             <div id="groups-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
         </section>
 
+        <!-- Contact -->
         <section id="contact" class="reveal" style="animation-delay: 0.8s;">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="heading-font text-4xl uppercase italic tracking-[-2px] neon-text">LET'S BUILD SOMETHING INSANE</h2>
@@ -360,7 +363,6 @@
             requestAnimationFrame(step);
         }
 
-        // OPTIMIZED Particle System (65 particles, NO connections = zero lag)
         function createParticleBackground() {
             const canvas = document.getElementById('particles');
             const ctx = canvas.getContext('2d');
@@ -396,7 +398,7 @@
                 canvas.height = window.innerHeight;
             }
 
-            function initParticles(count = 65) { // heavily reduced
+            function initParticles(count = 65) {
                 particlesArray = [];
                 for (let i = 0; i < count; i++) {
                     particlesArray.push(new Particle());
@@ -467,7 +469,7 @@
                         const badge = isContributed ? `<div class="contrib-badge">CONTRIBUTION</div>` : '';
                         return `
                         <div class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full relative">
-                            <div class="img-container">
+                            <div class="img-container game-img-container">
                                 ${badge}
                                 <img src="${thumbMap[g.id] || ''}" alt="${g.name}">
                             </div>
@@ -521,7 +523,7 @@
             const pressGrid = document.getElementById('press-grid');
             pressGrid.innerHTML = cfg.pressVideos.map(id => `
                 <a href="https://www.youtube.com/watch?v=${id}" target="_blank" class="video-card glass rounded-3xl overflow-hidden flex flex-col h-full relative group">
-                    <div class="img-container">
+                    <div class="img-container game-img-container">
                         <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="YouTube Video" class="w-full h-full object-cover">
                         <div class="play-overlay flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300">
                             <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center shadow-[0_0_30px_#00f0ff] scale-90 group-active:scale-95">
@@ -535,7 +537,7 @@
                 </a>
             `).join('');
 
-            // Groups
+            // Groups – now square
             const groupsGrid = document.getElementById('groups-grid');
             try {
                 const groupIds = cfg.groups.map(g => g.id).join(',');
@@ -558,7 +560,7 @@
 
                 groupsGrid.innerHTML = enriched.map(g => `
                     <a href="${g.link}" target="_blank" class="game-card glass rounded-3xl overflow-hidden flex flex-col h-full group">
-                        <div class="img-container">
+                        <div class="img-container studio-img-container">
                             <img src="${thumbMap[g.id] || ''}" alt="${g.name}">
                         </div>
                         <div class="p-7 flex flex-col flex-1">
@@ -581,14 +583,12 @@
         window.addEventListener('load', () => {
             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
             
-            // Start particles
             cleanupParticleSystem = createParticleBackground();
             
             loadPortfolio();
             
             document.getElementById('hamburger-btn').addEventListener('click', toggleMobileMenu);
             
-            // Show performance toggle on desktop
             if (window.innerWidth >= 768) {
                 document.getElementById('perf-toggle').classList.remove('hidden');
             }
